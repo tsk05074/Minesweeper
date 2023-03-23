@@ -1,34 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+public class PlayerController : MonoBehaviour {
 
-public class PlayerController : MonoBehaviour
-{
-    public VariableJoystick joy;
-    public float speed;
+  public Transform moving_object;
+    public float speed = 20f;
 
-    Rigidbody rigidbody;
-    Vector3 moveVec;
 
-    void Start()
-    {
-        rigidbody = GetComponent<Rigidbody>();
+    private Joystick controller;
+    private void Start() {
+        controller = this.GetComponent<Joystick>();
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-        float x = joy.Horizontal;
-        float z = joy.Vertical;
+        Vector3 moveDir = Vector3.forward * controller.Vertical;
+        moveDir += Vector3.right * controller.Horizontal;
 
-        moveVec = new Vector3(x,0,z) * speed * Time.deltaTime;
-        rigidbody.MovePosition(rigidbody.position + moveVec);
+        if(moveDir == Vector3.zero) return;
 
-        if(moveVec.sqrMagnitude == 0){
-            return;
-        }
-
-        Quaternion dirQuat = Quaternion.LookRotation(moveVec);
-        Quaternion moveQuat = Quaternion.Slerp(rigidbody.rotation, dirQuat, 0.3f);
-        rigidbody.MoveRotation(moveQuat);
+        moving_object.rotation = Quaternion.LookRotation(moveDir);
+        moving_object.Translate(Vector3.forward * Time.fixedDeltaTime * speed);
     }
 }

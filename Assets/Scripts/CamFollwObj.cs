@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class CamFollwObj : MonoBehaviour
 {
-    public Transform follow_obj;
+    public Vector3 _offset;
+    public Transform target;
 
-    private void FixedUPdate(){
-        Vector3 pos = this.transform.position;
-        this.transform.position = Vector3.Lerp(pos, follow_obj.position, 0.4f);
+    private void Update(){
+        transform.position = target.position + _offset;
     }
 }
