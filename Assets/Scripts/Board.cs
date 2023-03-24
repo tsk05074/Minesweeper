@@ -21,6 +21,9 @@ public class Board : MonoBehaviour
     public Tile tileNum7;
     public Tile tileNum8;
 
+    public GameObject Box;
+
+
    private void Awake() {
         tilemap = GetComponent<Tilemap>();
    }
@@ -35,6 +38,7 @@ public class Board : MonoBehaviour
             for(int y = 0; y< height; y++){
                 Cell cell = state[x,y];
                 tilemap.SetTile(cell.position, GetTile(cell));
+                var tile = Instantiate(Box, new Vector3Int(cell.position.x,0,cell.position.y), Quaternion.identity);
             }
         }
    }
