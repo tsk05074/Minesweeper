@@ -5,9 +5,6 @@ using UnityEngine;
 public class RotateCam : MonoBehaviour
 {
     public VariableJoystick lookJoy;
-
-     public Vector3 _offset;
-    public Transform target;
     public float xRotaton = 0f;
     public float yRotaton = 0f;
     public float sensitivity;

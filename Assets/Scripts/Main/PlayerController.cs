@@ -4,8 +4,6 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
     public Transform moving_object;
     public float speed = 20f;
-
-
     private Joystick controller;
     private void Start() {
         controller = this.GetComponent<Joystick>();

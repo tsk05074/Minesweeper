@@ -28,6 +28,8 @@ public class Game : MonoBehaviour
     private void Start() {
         NewGame();
         cam = Camera.main;
+        SoundManager.Instance.PlayBGM("TitleBGM");
+
     }
 
     private void NewGame(){
