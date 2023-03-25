@@ -21,6 +21,12 @@ public class MainTitleView : MonoBehaviour
             .OnComplete(() => { SceneManager.LoadScene("Main"); });
     }
 
+    public void ResetGame(){
+        fadeImage.DOFade(1, 0.5f).From(0)
+            .OnStart(() => { fadeImage.gameObject.SetActive(true); })
+            .OnComplete(() => { SceneManager.LoadScene("Title"); });
+    }
+
     public void OptionOn()
     {
         SoundManager.Instance.PlaySFX("ClickSfx");

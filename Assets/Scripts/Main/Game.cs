@@ -14,6 +14,7 @@ public class Game : MonoBehaviour
 
     public GameObject player;
 
+    private Animator animator;
     private void OnValidate(){
         mineCount = Mathf.Clamp(mineCount,0,width*height);
     }
@@ -29,6 +30,7 @@ public class Game : MonoBehaviour
         NewGame();
         cam = Camera.main;
         SoundManager.Instance.PlayBGM("TitleBGM");
+        animator = player.GetComponent<Animator>();
 
     }
 
@@ -203,6 +205,8 @@ public class Game : MonoBehaviour
 
     private void Explode(Cell cell){
         Debug.Log("Game Over!");
+        animator.SetTrigger("IsLoseing");
+        player.transform.rotation = Quaternion.Euler(0f,180f,0f);
         gameover = true;
 
         cell.revealed = true;
@@ -232,8 +236,10 @@ public class Game : MonoBehaviour
                 }
             }
         }
-
+        animator.SetTrigger("IsWin");
         Debug.Log("Win!");
+        player.transform.rotation = Quaternion.Euler(0f,180f,0f);
+
         gameover = true;
 
          for(int x = 0; x < width; x++){
