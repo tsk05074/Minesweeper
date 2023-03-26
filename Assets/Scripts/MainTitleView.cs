@@ -16,6 +16,7 @@ public class MainTitleView : MonoBehaviour
 
     public void StartGame()
     {
+        SoundManager.Instance.PlaySFX("click");
         fadeImage.DOFade(1, 0.5f).From(0)
             .OnStart(() => { fadeImage.gameObject.SetActive(true); })
             .OnComplete(() => { SceneManager.LoadScene("Main"); });

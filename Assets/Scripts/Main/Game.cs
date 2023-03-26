@@ -197,6 +197,8 @@ public class Game : MonoBehaviour
     private void Explode(Cell cell){
         Debug.Log("Game Over!");
         animator.SetTrigger("IsLoseing");
+        SoundManager.Instance.PlaySFX("Lose");
+
         player.transform.rotation = Quaternion.Euler(0f,180f,0f);
         gameover = true;
 
@@ -229,6 +231,8 @@ public class Game : MonoBehaviour
         }
         animator.SetTrigger("IsWin");
         Debug.Log("Win!");
+        SoundManager.Instance.PlaySFX("Win");
+
         player.transform.rotation = Quaternion.Euler(0f,180f,0f);
 
         gameover = true;

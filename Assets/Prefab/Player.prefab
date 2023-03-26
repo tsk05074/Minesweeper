@@ -982,7 +982,7 @@ Transform:
   - {fileID: 991079493105238380}
   - {fileID: 1275473887232081912}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &6957010580687152138
 Rigidbody:
@@ -1045,10 +1045,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87531be33bae3e440a2bd139052300af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  box: {fileID: 7454636519355242744, guid: 08546b25027476e419b6bbb46e6faaa4, type: 3}
-  vfx:
-  - {fileID: 100018, guid: a40b64bf23366dc42a892af2c6ff6140, type: 3}
-  effectToSpawn: {fileID: 100018, guid: a40b64bf23366dc42a892af2c6ff6140, type: 3}
+  ps: {fileID: 0}
 --- !u!1 &7804749985863491693
 GameObject:
   m_ObjectHideFlags: 0

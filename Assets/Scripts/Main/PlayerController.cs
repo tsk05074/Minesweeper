@@ -16,19 +16,22 @@ public class PlayerController : MonoBehaviour {
     {
         
         Vector3 moveDir = Vector3.forward * controller.Vertical;
-        moveDir += Vector3.right * controller.Horizontal;{
+        moveDir += Vector3.right * controller.Horizontal;
 
+        if(Game.Instance.gameover){
+            moveDir = Vector3.zero;
         }
+        else if(Game.Instance.gameover == false){
+             if(moveDir == Vector3.zero) {
+             animator.SetBool("IsWalking", false);
+            }
+            else{
+                moving_object.rotation = Quaternion.LookRotation(moveDir);
+                moving_object.Translate(Vector3.forward * Time.fixedDeltaTime * speed);
+                animator.SetBool("IsWalking", true);
 
-        if(moveDir == Vector3.zero) {
-            animator.SetBool("IsWalking", false);
-            //return;
+            }
         }
-        else{
-            moving_object.rotation = Quaternion.LookRotation(moveDir);
-            moving_object.Translate(Vector3.forward * Time.fixedDeltaTime * speed);
-            animator.SetBool("IsWalking", true);
-
-        }
+       
     }
 }
