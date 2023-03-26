@@ -956,11 +956,12 @@ GameObject:
   m_Component:
   - component: {fileID: 7423899478878356463}
   - component: {fileID: 6957010580687152138}
-  - component: {fileID: 6957010580687152139}
   - component: {fileID: 6957010580687152137}
+  - component: {fileID: 3077834222949989859}
+  - component: {fileID: 4090238385428394334}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -997,22 +998,8 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
---- !u!136 &6957010580687152139
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7803943836747618645}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.6847939
-  m_Height: 3.1780355
-  m_Direction: 1
-  m_Center: {x: 0, y: 1.5733963, z: -0.009195805}
 --- !u!95 &6957010580687152137
 Animator:
   serializedVersion: 4
@@ -1033,6 +1020,35 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &3077834222949989859
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7803943836747618645}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2.504703, z: 1}
+  m_Center: {x: 0, y: 1.0923514, z: 0}
+--- !u!114 &4090238385428394334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7803943836747618645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87531be33bae3e440a2bd139052300af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  box: {fileID: 7454636519355242744, guid: 08546b25027476e419b6bbb46e6faaa4, type: 3}
+  vfx:
+  - {fileID: 100018, guid: a40b64bf23366dc42a892af2c6ff6140, type: 3}
+  effectToSpawn: {fileID: 100018, guid: a40b64bf23366dc42a892af2c6ff6140, type: 3}
 --- !u!1 &7804749985863491693
 GameObject:
   m_ObjectHideFlags: 0

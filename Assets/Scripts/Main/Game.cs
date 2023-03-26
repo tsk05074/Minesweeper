@@ -4,26 +4,38 @@ using UnityEngine;
 
 public class Game : MonoBehaviour
 {
+    private static Game _instance;
+    public static Game Instance {get {return _instance;}}
    public int width;
     public int height;
     public int mineCount;
 
     private Board board;
     private Cell[,] state;
-    private bool gameover;
+    public bool gameover;
+    public bool isclickButton = false;
+    public bool isFlagButton = false;
 
     public GameObject player;
-
     private Animator animator;
+
+    
     private void OnValidate(){
         mineCount = Mathf.Clamp(mineCount,0,width*height);
     }
 
     private Camera cam = null;
     private void Awake(){
+
+        if(_instance != null && _instance != this){
+            Destroy(this.gameObject);
+        }
+        else{
+            _instance = this;
+        }
+
         board = GetComponentInChildren<Board>();
         player.transform.position = new Vector3(width/2f, height / 2f, 1f);
-
     }
 
     private void Start() {
@@ -31,7 +43,6 @@ public class Game : MonoBehaviour
         cam = Camera.main;
         SoundManager.Instance.PlayBGM("TitleBGM");
         animator = player.GetComponent<Animator>();
-
     }
 
     private void NewGame(){
@@ -74,7 +85,6 @@ public class Game : MonoBehaviour
             }
 
             state[x,y].type = Cell.Type.Mine;
-            //state[x,y].revealed = true;
         }
     }
 
@@ -92,8 +102,6 @@ public class Game : MonoBehaviour
                 if(cell.number > 0){
                     cell.type = Cell.Type.Number;
                 }
-
-                //cell.revealed = true;
                 state[x,y] = cell;
             }
         }
@@ -121,28 +129,8 @@ public class Game : MonoBehaviour
         return count;
     }
 
-    private void Update(){
-
-        if(Input.GetKeyDown(KeyCode.R)){
-            NewGame();
-        }
-
-        if(!gameover){
-            if(Input.GetMouseButtonDown(1)){
-                Flag();
-            }
-            else if(Input.GetMouseButtonDown(0)){
-                Reveal();
-            }
-        }  
-    }
-
-    private void Flag(){
-        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-
-        if(Physics.Raycast(ray, out hit)){
-            Vector3Int CellPosition = board.tilemap.WorldToCell(hit.point);
+    public void Flag(Vector3 worldPosition){
+       Vector3Int CellPosition = board.tilemap.WorldToCell(worldPosition);
 
             Cell cell = GetCell(CellPosition.x, CellPosition.y);
 
@@ -153,15 +141,11 @@ public class Game : MonoBehaviour
             cell.flagged = !cell.flagged;
             state[CellPosition.x, CellPosition.y] = cell;
             board.Draw(state);
-            }
     }
 
-    private void Reveal(){
-        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
+    public void Reveal(Vector3 worldPosition){
 
-        if(Physics.Raycast(ray, out hit)){
-            Vector3Int CellPosition = board.tilemap.WorldToCell(hit.point);
+            Vector3Int CellPosition = board.tilemap.WorldToCell(worldPosition);
 
             Cell cell = GetCell(CellPosition.x, CellPosition.y);
 
@@ -185,7 +169,14 @@ public class Game : MonoBehaviour
             cell.revealed = true;
             state[CellPosition.x, CellPosition.y] = cell;
             board.Draw(state);
-            }
+    }
+
+    public void IsclickButton(){
+        isclickButton = true;
+    }
+
+    public void IsFlagButton(){
+        isFlagButton = true;
     }
 
     private void Flood(Cell cell){
@@ -265,5 +256,5 @@ public class Game : MonoBehaviour
 
     private bool IsValid(int x, int y){
         return x >= 0 && x < width &&  y >= 0 && y < height;
-    }
+    } 
 }
