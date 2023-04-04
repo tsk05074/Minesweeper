@@ -1228,6 +1228,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moving_object: {fileID: 543450652418406221}
   speed: 5
+  xMin: 0
+  xMax: 31
+  zMin: 0
+  zMax: 31
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0

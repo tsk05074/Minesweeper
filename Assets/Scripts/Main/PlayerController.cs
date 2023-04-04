@@ -26,10 +26,16 @@ public class PlayerController : MonoBehaviour {
              animator.SetBool("IsWalking", false);
             }
             else{
+
                 moving_object.rotation = Quaternion.LookRotation(moveDir);
                 moving_object.Translate(Vector3.forward * Time.fixedDeltaTime * speed);
-                animator.SetBool("IsWalking", true);
 
+                float x = Mathf.Clamp(moving_object.position.x,0.5f,31.5f);
+                float z = Mathf.Clamp(moving_object.position.z,0.5f,31.5f);
+
+                moving_object.position = new Vector3(x,transform.position.y + 0.1f,z);
+
+                animator.SetBool("IsWalking", true);
             }
         }
        

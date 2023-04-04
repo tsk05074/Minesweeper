@@ -35,7 +35,7 @@ public class Game : MonoBehaviour
         }
 
         board = GetComponentInChildren<Board>();
-        player.transform.position = new Vector3(width/2f, height / 2f, 1f);
+        player.transform.position = new Vector3(width/2f, 1f, height / 2f);
     }
 
     private void Start() {
