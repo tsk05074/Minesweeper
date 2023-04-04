@@ -12,6 +12,8 @@ public class Environment : MonoBehaviour
     [SerializeField] private Slider bgmVolumeSlider;
     [SerializeField] private Slider sfxVolumeSlider;
 
+    public static int TickCount { get; internal set; }
+
     private void Start()
     {
         masterVolumeSlider.onValueChanged.AddListener(value => SoundManager.Instance.SetMasterVolume(value));
