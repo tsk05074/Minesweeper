@@ -5,9 +5,13 @@ using UnityEngine;
 public class CamFollwObj : MonoBehaviour
 {
     public Vector3 _offset;
-    public Transform target;
+    public GameObject target;
+
+    void Start(){
+        target = GameObject.Find("Player(Clone)");
+    }
     
     private void Update(){
-        transform.position = target.position + _offset;
+        transform.position = target.transform.position + _offset;
     }
 }

@@ -48,4 +48,18 @@ public class MenuController : MonoBehaviourPunCallbacks
     UsernameMenu.SetActive(false);
     PhotonNetwork.NickName = UsernameInput.text;
    }
+
+   public void CreateGame(){
+    PhotonNetwork.CreateRoom(CreateGameInput.text, new RoomOptions() {MaxPlayers = 2}, null);
+   }
+
+   public void JoinGame(){
+    RoomOptions roomOptions = new RoomOptions();
+    roomOptions.MaxPlayers = 2;
+    PhotonNetwork.JoinOrCreateRoom(JoinGameInput.text, roomOptions, TypedLobby.Default);
+   }
+
+   public override void OnJoinedRoom(){
+    PhotonNetwork.LoadLevel("Main");
+   }
 }

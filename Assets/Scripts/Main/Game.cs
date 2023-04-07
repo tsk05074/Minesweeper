@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class Game : MonoBehaviour
+public class Game : MonoBehaviour, IPunObservable
 {
     private static Game _instance;
     public static Game Instance {get {return _instance;}}
@@ -11,14 +12,14 @@ public class Game : MonoBehaviour
     public int mineCount;
 
     private Board board;
-    private Cell[,] state;
+    public Cell[,] state;
     public bool gameover;
     public bool isclickButton = false;
     public bool isFlagButton = false;
 
-    public GameObject player;
+    private GameObject player;
     private Animator animator;
-
+    public PhotonView PV;
     
     private void OnValidate(){
         mineCount = Mathf.Clamp(mineCount,0,width*height);
@@ -35,27 +36,31 @@ public class Game : MonoBehaviour
         }
 
         board = GetComponentInChildren<Board>();
-        player.transform.position = new Vector3(width/2f, 1f, height / 2f);
+        
     }
 
     private void Start() {
+        player = GameObject.Find("Player(Clone)");
         NewGame();
         cam = Camera.main;
         SoundManager.Instance.PlayBGM("TitleBGM");
         animator = player.GetComponent<Animator>();
+        PV = GetComponent<PhotonView>();
     }
 
     private void NewGame(){
         state = new Cell[width,height];
         gameover = false;
 
-        GetnerateCells();
-        GenerateMines();
-        GenerateNumbers();
+        PV.RPC("GetnerateCells", RpcTarget.AllBuffered);
+        PV.RPC("GenerateMines", RpcTarget.AllBuffered);
+        PV.RPC("GenerateNumbers", RpcTarget.AllBuffered);
 
         board.Draw(state);
+        //board.boardPV.RPC("Draw", RpcTarget.All, state);
     }
-
+    
+    [PunRPC]
     private void GetnerateCells(){
         for(int x = 0; x < width; x++){
             for(int y = 0; y < height; y++){
@@ -66,7 +71,7 @@ public class Game : MonoBehaviour
             }
         }
     }
-
+     [PunRPC]
     private void GenerateMines(){
         for(int i=0; i<mineCount; i++){
             int x = Random.Range(0, width);
@@ -87,7 +92,7 @@ public class Game : MonoBehaviour
             state[x,y].type = Cell.Type.Mine;
         }
     }
-
+    [PunRPC]
     private void GenerateNumbers(){
         for(int x = 0; x < width; x++){
             for(int y = 0; y < height; y++){
@@ -129,6 +134,7 @@ public class Game : MonoBehaviour
         return count;
     }
 
+    [PunRPC]
     public void Flag(Vector3 worldPosition){
        Vector3Int CellPosition = board.tilemap.WorldToCell(worldPosition);
 
@@ -141,8 +147,10 @@ public class Game : MonoBehaviour
             cell.flagged = !cell.flagged;
             state[CellPosition.x, CellPosition.y] = cell;
             board.Draw(state);
-    }
+            //board.boardPV.RPC("Draw", RpcTarget.AllBuffered, state);
 
+    }
+    [PunRPC]
     public void Reveal(Vector3 worldPosition){
 
             Vector3Int CellPosition = board.tilemap.WorldToCell(worldPosition);
@@ -156,19 +164,26 @@ public class Game : MonoBehaviour
             switch(cell.type){
                 case Cell.Type.Mine : Explode(cell); break;
                 case Cell.Type.Empty : Flood(cell); CheckWinCondition(); break;
+                // case Cell.Type.Mine : PV.RPC("Explode", RpcTarget.AllBuffered,cell); break;
+                // case Cell.Type.Empty : PV.RPC("Flood", RpcTarget.AllBuffered,cell); PV.RPC("CheckWinCondition", RpcTarget.AllBuffered); break;
                 default :  cell.revealed = true;
                 state[CellPosition.x, CellPosition.y] = cell;
                 CheckWinCondition();
+                // PV.RPC("CheckWinCondition", RpcTarget.AllBuffered);
                 break;
             }
 
             if(cell.type == Cell.Type.Empty){
                 Flood(cell);
+                // PV.RPC("Flood", RpcTarget.AllBuffered,cell);
             }
 
             cell.revealed = true;
             state[CellPosition.x, CellPosition.y] = cell;
             board.Draw(state);
+                    //board.boardPV.RPC("Draw", RpcTarget.AllBuffered, state);
+
+
     }
 
     public void IsclickButton(){
@@ -178,6 +193,7 @@ public class Game : MonoBehaviour
     public void IsFlagButton(){
         isFlagButton = true;
     }
+
 
     private void Flood(Cell cell){
         if (cell.revealed) return;
@@ -191,10 +207,18 @@ public class Game : MonoBehaviour
             Flood(GetCell(cell.position.x + 1, cell.position.y));
             Flood(GetCell(cell.position.x, cell.position.y - 1));
             Flood(GetCell(cell.position.x, cell.position.y + 1));
+            // PV.RPC("Flood", RpcTarget.AllBuffered,cell,GetCell(cell.position.x - 1, cell.position.y));
+            // PV.RPC("Flood", RpcTarget.AllBuffered,cell,GetCell(cell.position.x + 1, cell.position.y));
+            // PV.RPC("Flood", RpcTarget.AllBuffered,cell,GetCell(cell.position.x, cell.position.y - 1));
+            // PV.RPC("Flood", RpcTarget.AllBuffered,cell,GetCell(cell.position.x, cell.position.y + 1));
+
         }
     }
-
+    [PunRPC]
     private void Explode(Cell cell){
+
+        //player.GetComponent<PhotonView>().RPC("Dead", RpcTarget.AllBuffered);
+
         Debug.Log("Game Over!");
         animator.SetTrigger("IsLoseing");
         SoundManager.Instance.PlaySFX("Lose");
@@ -218,7 +242,7 @@ public class Game : MonoBehaviour
         }
 
     }
-
+    [PunRPC]
     private void CheckWinCondition(){
         for(int x = 0; x < width; x++){
             for(int y = 0; y <height; y++){
@@ -229,13 +253,14 @@ public class Game : MonoBehaviour
                 }
             }
         }
+
+        //player.GetComponent<PhotonView>().RPC("Win", RpcTarget.AllBuffered);
+
         animator.SetTrigger("IsWin");
         Debug.Log("Win!");
         SoundManager.Instance.PlaySFX("Win");
 
         player.transform.rotation = Quaternion.Euler(0f,180f,0f);
-
-        gameover = true;
 
          for(int x = 0; x < width; x++){
             for(int y = 0; y < height; y++){
@@ -260,5 +285,38 @@ public class Game : MonoBehaviour
 
     private bool IsValid(int x, int y){
         return x >= 0 && x < width &&  y >= 0 && y < height;
-    } 
+    }
+
+    [PunRPC]
+    private void Dead(){
+        Debug.Log("Game Over!");
+        animator.SetTrigger("IsLoseing");
+        SoundManager.Instance.PlaySFX("Lose");
+
+        player.transform.rotation = Quaternion.Euler(0f,180f,0f);
+        gameover = true;
+    }
+
+     [PunRPC]
+    private void Win(){
+        animator.SetTrigger("IsWin");
+        Debug.Log("Win!");
+        SoundManager.Instance.PlaySFX("Win");
+
+        player.transform.rotation = Quaternion.Euler(0f,180f,0f);
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if(stream.IsWriting){
+            stream.SendNext(isclickButton);
+            stream.SendNext(isFlagButton);
+        }
+        else{
+            isclickButton = (bool)stream.ReceiveNext();
+            isFlagButton = (bool)stream.ReceiveNext();
+
+        }
+       
+    }
 }

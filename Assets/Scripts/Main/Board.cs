@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Photon.Pun;
 
-public class Board : MonoBehaviour
+public class Board : MonoBehaviour, IPunObservable
 {
    public Tilemap tilemap {get; private set;}
 
@@ -23,11 +24,19 @@ public class Board : MonoBehaviour
 
     public GameObject Box;
 
+    public PhotonView boardPV;
+
+    public Game game;
+
     public bool isTile = false;
 
 
    private void Awake() {
         tilemap = GetComponent<Tilemap>();
+        game = FindObjectOfType<Game>();
+   }
+
+   void Start(){
    }
 
    public void Draw(Cell[,] state){
@@ -60,7 +69,6 @@ public class Board : MonoBehaviour
             return tileUnknown;
         }
    }
-
    private Tile GetRevealedTile(Cell cell){
         switch(cell.type){
             case Cell.Type.Empty : return tileEmpty;
@@ -83,4 +91,15 @@ public class Board : MonoBehaviour
             default : return null;
         }
    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+         if(stream.IsWriting){
+            stream.SendNext(tilemap);
+        }
+        else{
+            tilemap = (Tilemap)stream.ReceiveNext();
+
+        }
+    }
 }

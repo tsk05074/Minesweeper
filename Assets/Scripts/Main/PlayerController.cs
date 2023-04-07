@@ -1,20 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using Photon.Pun;
 public class PlayerController : MonoBehaviour {
-    public Transform moving_object;
-    public float speed = 20f;
+    private GameObject player;
     private Joystick controller;
-
     private Animator animator;
+
+    public PhotonView playerView;
+
+    public float speed = 20f;
+
     private void Start() {
+        player = GameObject.Find("Player(Clone)");
+        playerView = player.GetComponent<PhotonView>();
         controller = this.GetComponent<Joystick>();
-        animator = moving_object.GetComponent<Animator>();
+        animator = player.GetComponent<Animator>();
     }
 
     private void FixedUpdate()
     {
-        
+        if(!playerView.IsMine){
+            return;
+        }
+
         Vector3 moveDir = Vector3.forward * controller.Vertical;
         moveDir += Vector3.right * controller.Horizontal;
 
@@ -27,13 +37,13 @@ public class PlayerController : MonoBehaviour {
             }
             else{
 
-                moving_object.rotation = Quaternion.LookRotation(moveDir);
-                moving_object.Translate(Vector3.forward * Time.fixedDeltaTime * speed);
+                player.transform.rotation = Quaternion.LookRotation(moveDir);
+                player.transform.Translate(Vector3.forward * Time.fixedDeltaTime * speed);
 
-                float x = Mathf.Clamp(moving_object.position.x,0.5f,31.5f);
-                float z = Mathf.Clamp(moving_object.position.z,0.5f,31.5f);
+                float x = Mathf.Clamp(player.transform.position.x,0.5f,31.5f);
+                float z = Mathf.Clamp(player.transform.position.z,0.5f,31.5f);
 
-                moving_object.position = new Vector3(x,transform.position.y + 0.1f,z);
+                player.transform.position = new Vector3(x,transform.position.y + 0.1f,z);
 
                 animator.SetBool("IsWalking", true);
             }
