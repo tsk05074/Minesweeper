@@ -32,6 +32,7 @@ public class MenuController : MonoBehaviourPunCallbacks
     // 마스터 서버 접속 성공시 자동 실행
    public override void OnConnectedToMaster(){
         PhotonNetwork.JoinLobby(TypedLobby.Default);
+        PhotonNetwork.LocalPlayer.NickName = UsernameInput.text;
         Debug.Log("Connected");
    }
 

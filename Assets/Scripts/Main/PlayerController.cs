@@ -21,9 +21,6 @@ public class PlayerController : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        if(!playerView.IsMine){
-            return;
-        }
 
         Vector3 moveDir = Vector3.forward * controller.Vertical;
         moveDir += Vector3.right * controller.Horizontal;

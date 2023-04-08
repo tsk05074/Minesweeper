@@ -9,7 +9,7 @@ public class RotateCam : MonoBehaviour
     public float yRotaton = 0f;
     public float sensitivity;
 
-   private void FixedUpdate() {
+    private void FixedUpdate() {
         float currentX = lookJoy.Horizontal *sensitivity* Time.deltaTime;
         float currentY = lookJoy.Vertical *sensitivity* Time.deltaTime;
 

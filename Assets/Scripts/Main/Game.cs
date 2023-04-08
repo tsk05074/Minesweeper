@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Photon.Realtime;
+using ExitGames.Client.Photon;
 
-public class Game : MonoBehaviour, IPunObservable
+public class Game : MonoBehaviourPunCallbacks, IPunObservable
 {
     private static Game _instance;
     public static Game Instance {get {return _instance;}}
@@ -13,6 +15,7 @@ public class Game : MonoBehaviour, IPunObservable
 
     private Board board;
     public Cell[,] state;
+    public List<(int, int)> mines = new List<(int, int)>();
     public bool gameover;
     public bool isclickButton = false;
     public bool isFlagButton = false;
@@ -20,6 +23,8 @@ public class Game : MonoBehaviour, IPunObservable
     private GameObject player;
     private Animator animator;
     public PhotonView PV;
+
+    private const byte COLOR_CHANGE_EVENT = 0;
     
     private void OnValidate(){
         mineCount = Mathf.Clamp(mineCount,0,width*height);
@@ -48,19 +53,38 @@ public class Game : MonoBehaviour, IPunObservable
         PV = GetComponent<PhotonView>();
     }
 
+    public override void OnPlayerEnteredRoom(Player newPlayer){
+        if(PhotonNetwork.IsMasterClient){
+            Debug.Log("입장");
+
+            PV.RPC("ReceiveMineData", RpcTarget.OthersBuffered, (object)mines);
+        }
+    }
+
     private void NewGame(){
         state = new Cell[width,height];
         gameover = false;
 
-        PV.RPC("GetnerateCells", RpcTarget.AllBuffered);
-        PV.RPC("GenerateMines", RpcTarget.AllBuffered);
-        PV.RPC("GenerateNumbers", RpcTarget.AllBuffered);
+        GetnerateCells();
+        if (PhotonNetwork.IsMasterClient)
+        {
+            GenerateMines();
+        }
+        GenerateNumbers();
 
-        board.Draw(state);
-        //board.boardPV.RPC("Draw", RpcTarget.All, state);
+    board.Draw(state);
+}
+
+    [PunRPC]
+    void ReceiveMineData(object mineData)
+    {
+        mines = mineData as List<(int, int)>;
+        foreach (var mine in mines)
+        {
+            state[mine.Item1, mine.Item2].type = Cell.Type.Mine;
+        }
     }
     
-    [PunRPC]
     private void GetnerateCells(){
         for(int x = 0; x < width; x++){
             for(int y = 0; y < height; y++){
@@ -71,7 +95,7 @@ public class Game : MonoBehaviour, IPunObservable
             }
         }
     }
-     [PunRPC]
+
     private void GenerateMines(){
         for(int i=0; i<mineCount; i++){
             int x = Random.Range(0, width);
@@ -90,9 +114,9 @@ public class Game : MonoBehaviour, IPunObservable
             }
 
             state[x,y].type = Cell.Type.Mine;
+            mines.Add((x, y));
         }
     }
-    [PunRPC]
     private void GenerateNumbers(){
         for(int x = 0; x < width; x++){
             for(int y = 0; y < height; y++){
@@ -147,7 +171,6 @@ public class Game : MonoBehaviour, IPunObservable
             cell.flagged = !cell.flagged;
             state[CellPosition.x, CellPosition.y] = cell;
             board.Draw(state);
-            //board.boardPV.RPC("Draw", RpcTarget.AllBuffered, state);
 
     }
     [PunRPC]
@@ -169,19 +192,18 @@ public class Game : MonoBehaviour, IPunObservable
                 default :  cell.revealed = true;
                 state[CellPosition.x, CellPosition.y] = cell;
                 CheckWinCondition();
-                // PV.RPC("CheckWinCondition", RpcTarget.AllBuffered);
+                //PV.RPC("CheckWinCondition", RpcTarget.AllBuffered);
                 break;
             }
 
             if(cell.type == Cell.Type.Empty){
-                Flood(cell);
-                // PV.RPC("Flood", RpcTarget.AllBuffered,cell);
+                 Flood(cell);
+                //PV.RPC("Flood", RpcTarget.AllBuffered,cell);
             }
 
             cell.revealed = true;
             state[CellPosition.x, CellPosition.y] = cell;
             board.Draw(state);
-                    //board.boardPV.RPC("Draw", RpcTarget.AllBuffered, state);
 
 
     }
@@ -214,7 +236,7 @@ public class Game : MonoBehaviour, IPunObservable
 
         }
     }
-    [PunRPC]
+   
     private void Explode(Cell cell){
 
         //player.GetComponent<PhotonView>().RPC("Dead", RpcTarget.AllBuffered);
@@ -242,7 +264,7 @@ public class Game : MonoBehaviour, IPunObservable
         }
 
     }
-    [PunRPC]
+ 
     private void CheckWinCondition(){
         for(int x = 0; x < width; x++){
             for(int y = 0; y <height; y++){
@@ -287,7 +309,7 @@ public class Game : MonoBehaviour, IPunObservable
         return x >= 0 && x < width &&  y >= 0 && y < height;
     }
 
-    [PunRPC]
+    
     private void Dead(){
         Debug.Log("Game Over!");
         animator.SetTrigger("IsLoseing");
@@ -297,7 +319,7 @@ public class Game : MonoBehaviour, IPunObservable
         gameover = true;
     }
 
-     [PunRPC]
+    
     private void Win(){
         animator.SetTrigger("IsWin");
         Debug.Log("Win!");
@@ -309,13 +331,12 @@ public class Game : MonoBehaviour, IPunObservable
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if(stream.IsWriting){
-            stream.SendNext(isclickButton);
-            stream.SendNext(isFlagButton);
+            stream.SendNext(state);
+            stream.SendNext(mines);
         }
         else{
-            isclickButton = (bool)stream.ReceiveNext();
-            isFlagButton = (bool)stream.ReceiveNext();
-
+            state = (Cell[,])stream.ReceiveNext();
+            mines = (List<(int, int)>)stream.ReceiveNext();
         }
        
     }
