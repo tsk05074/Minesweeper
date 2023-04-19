@@ -4,18 +4,26 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using ExitGames.Client.Photon;
+using Player = Photon.Realtime.Player;
+using System.IO;
+using System;
 
-public class Game : MonoBehaviourPunCallbacks, IPunObservable
+public class Game : MonoBehaviourPunCallbacks
 {
+
     private static Game _instance;
     public static Game Instance {get {return _instance;}}
-   public int width;
+    public int width;
     public int height;
     public int mineCount;
 
     private Board board;
     public Cell[,] state;
+    //public Cell[,] mine;
+
     public List<(int, int)> mines = new List<(int, int)>();
+    public List<int> Xdata = new List<int>();
+    public List<int> Ydata = new List<int>();
     public bool gameover;
     public bool isclickButton = false;
     public bool isFlagButton = false;
@@ -23,9 +31,8 @@ public class Game : MonoBehaviourPunCallbacks, IPunObservable
     private GameObject player;
     private Animator animator;
     public PhotonView PV;
+    public string mineString;
 
-    private const byte COLOR_CHANGE_EVENT = 0;
-    
     private void OnValidate(){
         mineCount = Mathf.Clamp(mineCount,0,width*height);
     }
@@ -39,50 +46,43 @@ public class Game : MonoBehaviourPunCallbacks, IPunObservable
         else{
             _instance = this;
         }
-
         board = GetComponentInChildren<Board>();
-        
     }
-
+  
     private void Start() {
-        player = GameObject.Find("Player(Clone)");
-        NewGame();
         cam = Camera.main;
+        player = GameObject.Find("Player(Clone)");
         SoundManager.Instance.PlayBGM("TitleBGM");
         animator = player.GetComponent<Animator>();
         PV = GetComponent<PhotonView>();
+        NewGame();
     }
 
-    public override void OnPlayerEnteredRoom(Player newPlayer){
-        if(PhotonNetwork.IsMasterClient){
-            Debug.Log("입장");
-
-            PV.RPC("ReceiveMineData", RpcTarget.OthersBuffered, (object)mines);
-        }
+    public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer){
+        Debug.Log("손님 입장");
+                state = new Cell[width,height];
+                gameover = false;
+                GetnerateCells();
+                board.Draw(state);
     }
 
     private void NewGame(){
-        state = new Cell[width,height];
-        gameover = false;
+            // state = new Cell[width,height];
+            // gameover = false;
+            // GetnerateCells();
 
-        GetnerateCells();
-        if (PhotonNetwork.IsMasterClient)
-        {
-            GenerateMines();
-        }
-        GenerateNumbers();
+            if(PhotonNetwork.IsMasterClient == true){
+                Debug.Log("마스터클라");
+                state = new Cell[width,height];
+                gameover = false;
+                GetnerateCells();
+                GenerateMines();    
+                GenerateNumbers();
 
-    board.Draw(state);
-}
-
-    [PunRPC]
-    void ReceiveMineData(object mineData)
-    {
-        mines = mineData as List<(int, int)>;
-        foreach (var mine in mines)
-        {
-            state[mine.Item1, mine.Item2].type = Cell.Type.Mine;
-        }
+                board.Draw(state); 
+            }
+            //PV.RPC("ReceiveMineData", RpcTarget.OthersBuffered, TreeString, mines);
+        
     }
     
     private void GetnerateCells(){
@@ -95,11 +95,24 @@ public class Game : MonoBehaviourPunCallbacks, IPunObservable
             }
         }
     }
-
+    
+     [PunRPC]
+    void ReceiveMineData(List<(int, int)> mineData)
+    {
+        mines = mineData as List<(int, int)>;
+        Debug.Log(mines.Count);
+        
+        foreach (var mine in mines)
+        {
+            state[mine.Item1, mine.Item2].type = Cell.Type.Mine;
+            Debug.Log(mines[mine.Item1].Item1 + " : " + mines[mine.Item2].Item2);
+        }
+    }
     private void GenerateMines(){
-        for(int i=0; i<mineCount; i++){
-            int x = Random.Range(0, width);
-            int y = Random.Range(0, height);
+            for(int i=0; i<mineCount; i++){
+            
+            int x = UnityEngine.Random.Range(0, width);
+            int y = UnityEngine.Random.Range(0, height);
 
             while(state[x,y].type == Cell.Type.Mine){
                 x++;
@@ -114,9 +127,12 @@ public class Game : MonoBehaviourPunCallbacks, IPunObservable
             }
 
             state[x,y].type = Cell.Type.Mine;
+            
             mines.Add((x, y));
         }
+        //PV.RPC("ReceiveMineData", RpcTarget.OthersBuffered, mines, mines);
     }
+   
     private void GenerateNumbers(){
         for(int x = 0; x < width; x++){
             for(int y = 0; y < height; y++){
@@ -134,6 +150,8 @@ public class Game : MonoBehaviourPunCallbacks, IPunObservable
                 state[x,y] = cell;
             }
         }
+                Debug.Log("generateNumber");
+
     }
 
     private int CountMines(int cellX, int cellY){
@@ -215,7 +233,6 @@ public class Game : MonoBehaviourPunCallbacks, IPunObservable
     public void IsFlagButton(){
         isFlagButton = true;
     }
-
 
     private void Flood(Cell cell){
         if (cell.revealed) return;
@@ -327,17 +344,8 @@ public class Game : MonoBehaviourPunCallbacks, IPunObservable
 
         player.transform.rotation = Quaternion.Euler(0f,180f,0f);
     }
-
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if(stream.IsWriting){
-            stream.SendNext(state);
-            stream.SendNext(mines);
-        }
-        else{
-            state = (Cell[,])stream.ReceiveNext();
-            mines = (List<(int, int)>)stream.ReceiveNext();
-        }
-       
-    }
 }
+
+
+
+

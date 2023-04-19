@@ -7,8 +7,16 @@ public class GameManager : MonoBehaviour
 {
     public GameObject PlayerPrefab;
 
-    void Awake()
+    void Start()
     {
-        PhotonNetwork.Instantiate(PlayerPrefab.name, new Vector3(16f, 1f, 16f), Quaternion.identity,0);
+        float randomValueX = Random.Range(0f,16f);
+        float randomValueY = Random.Range(0f,16f);
+
+        if(PhotonNetwork.IsMasterClient){
+            PhotonNetwork.Instantiate(PlayerPrefab.name, new Vector3(randomValueX, 1f, randomValueY), Quaternion.identity,0);
+        }
+        else{
+            PhotonNetwork.Instantiate(PlayerPrefab.name, new Vector3(randomValueX, 1f, randomValueY), Quaternion.identity,0);
+        }
     }
 }

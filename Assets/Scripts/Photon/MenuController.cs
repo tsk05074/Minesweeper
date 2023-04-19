@@ -19,6 +19,8 @@ public class MenuController : MonoBehaviourPunCallbacks
 
    private void Awake()
    {
+    //방장이 혼자 씬을 로딩하면, 나머지 사람들은 자동으로 싱크가 됨
+    PhotonNetwork.AutomaticallySyncScene = true;
     //접속에 필요한 정보 설정(게임 버전)
     PhotonNetwork.GameVersion = this.VersionName;
     //설정한 정보로 마스터 서버 접속 시도
@@ -26,13 +28,13 @@ public class MenuController : MonoBehaviourPunCallbacks
    }
 
    private void Start(){
-    UsernameMenu.SetActive(true);
+        UsernameMenu.SetActive(true);
+        PhotonNetwork.NickName = UsernameInput.text;
    }
 
     // 마스터 서버 접속 성공시 자동 실행
    public override void OnConnectedToMaster(){
         PhotonNetwork.JoinLobby(TypedLobby.Default);
-        PhotonNetwork.LocalPlayer.NickName = UsernameInput.text;
         Debug.Log("Connected");
    }
 
@@ -61,6 +63,9 @@ public class MenuController : MonoBehaviourPunCallbacks
    }
 
    public override void OnJoinedRoom(){
-    PhotonNetwork.LoadLevel("Main");
+    if(PhotonNetwork.IsMasterClient){
+        PhotonNetwork.LoadLevel("Main");
+
+    }
    }
 }

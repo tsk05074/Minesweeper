@@ -300,6 +300,8 @@ GameObject:
   - component: {fileID: 167414793}
   - component: {fileID: 167414792}
   - component: {fileID: 167414794}
+  - component: {fileID: 167414795}
+  - component: {fileID: 167414796}
   m_Layer: 0
   m_Name: Tilemap
   m_TagString: Untagged
@@ -445,7 +447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a00ad03e746fa1d43aa9aa78e8f765f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileUnknown: {fileID: 11400000, guid: faf67eaa2793fae4a84dd79e60d4fac1, type: 2}
+  tileUnknown: {fileID: 11400000, guid: 791144b0d77fd1d4cb0875e21208b371, type: 2}
   tileEmpty: {fileID: 11400000, guid: 89868989202c65c438f4820088713436, type: 2}
   tileMine: {fileID: 11400000, guid: 6df8c9e77a9360149b8a62cbe389cdaf, type: 2}
   tileExploded: {fileID: 11400000, guid: 5fc086f8ff0c49b498a0baf10824af60, type: 2}
@@ -459,9 +461,49 @@ MonoBehaviour:
   tileNum7: {fileID: 11400000, guid: 1c7c19dcf52c4b449a8c864038b4e59d, type: 2}
   tileNum8: {fileID: 11400000, guid: a6b0cc473f26e66468d37f17e22fc997, type: 2}
   Box: {fileID: 7454636519355242744, guid: 08546b25027476e419b6bbb46e6faaa4, type: 3}
-  boardPV: {fileID: 0}
   game: {fileID: 679915900}
+  BoardPV: {fileID: 167414795}
   isTile: 0
+--- !u!114 &167414795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 167414790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 167414794}
+  - {fileID: 167414796}
+  sceneViewId: 2
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &167414796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 167414790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1 &209777372
 GameObject:
   m_ObjectHideFlags: 0
@@ -827,6 +869,7 @@ GameObject:
   - component: {fileID: 679915898}
   - component: {fileID: 679915900}
   - component: {fileID: 679915901}
+  - component: {fileID: 679915902}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -874,13 +917,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5999d719d4dd41242ba2831f569d87ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 32
-  height: 32
-  mineCount: 64
+  width: 16
+  height: 16
+  mineCount: 16
+  Xdata: 
+  Ydata: 
   gameover: 0
   isclickButton: 0
   isFlagButton: 0
   PV: {fileID: 679915901}
+  mineString: 
 --- !u!114 &679915901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -898,12 +944,28 @@ MonoBehaviour:
   prefixField: -1
   Synchronization: 3
   OwnershipTransfer: 0
-  observableSearch: 0
+  observableSearch: 2
   ObservedComponents:
-  - {fileID: 679915900}
+  - {fileID: 679915902}
   sceneViewId: 1
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &679915902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 679915897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1 &704228486
 GameObject:
   m_ObjectHideFlags: 0

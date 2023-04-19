@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using Photon.Pun;
 
-public class Board : MonoBehaviour, IPunObservable
+public class Board : MonoBehaviourPunCallbacks, IPunObservable
 {
-   public Tilemap tilemap {get; private set;}
+    public Tilemap tilemap {get; private set;}
 
     public Tile tileUnknown;
     public Tile tileEmpty;
@@ -24,19 +24,17 @@ public class Board : MonoBehaviour, IPunObservable
 
     public GameObject Box;
 
-    public PhotonView boardPV;
-
     public Game game;
+
+    public PhotonView BoardPV;
 
     public bool isTile = false;
 
-
+    Cell cell;
    private void Awake() {
         tilemap = GetComponent<Tilemap>();
         game = FindObjectOfType<Game>();
-   }
-
-   void Start(){
+        BoardPV = GetComponent<PhotonView>();
    }
 
    public void Draw(Cell[,] state){
@@ -47,16 +45,29 @@ public class Board : MonoBehaviour, IPunObservable
 
         for(int x = 0; x < width; x++){
             for(int y = 0; y< height; y++){
-                Cell cell = state[x,y];
+                cell = state[x,y];
+                //BoardPV.RPC("SetStone", RpcTarget.All, cell.position);
                 tilemap.SetTile(cell.position, GetTile(cell));
-                if(!isTile){
-                    var tile = Instantiate(Box, new Vector3Int(cell.position.x,0,cell.position.y), Quaternion.identity);
+                //var q = PhotonNetwork.Instantiate();
+                if(!isTile && PhotonNetwork.IsMasterClient){
+                    var tile = PhotonNetwork.Instantiate("Box", new Vector3Int(cell.position.x,0,cell.position.y), Quaternion.identity,0);
+                    //var tile = Instantiate(Box, new Vector3Int(cell.position.x,0,cell.position.y), Quaternion.identity);
                 }
             }
         }
 
+        Debug.Log("Draw");
+
         isTile = true;
    }
+
+//    public void SetStone(Vector3Int pos){
+//         Debug.Log("셋타일");
+//         if(!BoardPV.IsMine) return;
+
+//         tilemap.SetTile(pos, GetTile(cell));
+//    }
+
 
    private Tile GetTile(Cell cell){
         if(cell.revealed){
@@ -91,15 +102,17 @@ public class Board : MonoBehaviour, IPunObservable
             default : return null;
         }
    }
-
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
          if(stream.IsWriting){
             stream.SendNext(tilemap);
+            stream.SendNext(cell);
+         
         }
         else{
             tilemap = (Tilemap)stream.ReceiveNext();
-
+            cell = (Cell)stream.ReceiveNext();
+            
         }
     }
 }
