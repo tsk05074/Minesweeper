@@ -21,7 +21,8 @@ public class Neko : MonoBehaviourPun
     private void OnCollisionStay(Collision other) {
         if(other.gameObject.tag=="Tile" && Game.Instance.isclickButton == true && photonView.IsMine){
 
-            
+            Debug.Log("isflag");
+
             Game.Instance.PV.RPC("Flag", RpcTarget.AllBuffered, new Vector3(other.transform.position.x,
             other.transform.position.y,other.transform.position.z));
 
@@ -29,7 +30,7 @@ public class Neko : MonoBehaviourPun
             SoundManager.Instance.PlaySFX("flag");
         }
         else if(other.gameObject.tag == "Tile" && Game.Instance.isFlagButton == true && photonView.IsMine){
-    
+            Debug.Log("isclick");
             Game.Instance.PV.RPC("Reveal", RpcTarget.AllBuffered, new Vector3(other.transform.position.x,
             other.transform.position.y,other.transform.position.z));
             
