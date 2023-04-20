@@ -56,22 +56,6 @@ public class Board : MonoBehaviourPunCallbacks, IPunObservable
             }
         }
 
-        for (int x = 0; x < width; x++)
-        {
-            for (int y = 0; y < height; y++)
-            {
-                cell = state[x, y];
-                //BoardPV.RPC("SetStone", RpcTarget.All, cell.position);
-                tilemap.SetTile(new Vector3Int(cell.position.x + 20, cell.position.y, 0), GetTile(cell));
-                //var q = PhotonNetwork.Instantiate();
-                if (!isTile && PhotonNetwork.IsMasterClient)
-                {
-                    var tile = PhotonNetwork.Instantiate("Box", new Vector3Int(cell.position.x + 20, 0, cell.position.y), Quaternion.identity, 0);
-                    //var tile = Instantiate(Box, new Vector3Int(cell.position.x,0,cell.position.y), Quaternion.identity);
-                }
-            }
-        }
-
         Debug.Log("Draw");
 
         isTile = true;

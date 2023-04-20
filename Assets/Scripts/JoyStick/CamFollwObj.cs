@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class CamFollwObj : MonoBehaviourPunCallbacks
+public class CamFollwObj : MonoBehaviour
 {
     public Vector3 _offset;
     public GameObject target;
