@@ -249,9 +249,9 @@ GameObject:
   - component: {fileID: 6626519150538866571}
   - component: {fileID: 5297354422247502646}
   - component: {fileID: 4748163586147439131}
-  - component: {fileID: 4798554537231414212}
   - component: {fileID: 7344750061453683734}
   - component: {fileID: 3199690756511347093}
+  - component: {fileID: 7106550583590841377}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -359,28 +359,12 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
-  - {fileID: 4798554537231414212}
   - {fileID: 7344750061453683734}
   - {fileID: 3199690756511347093}
+  - {fileID: 7106550583590841377}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &4798554537231414212
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2093510231684848445}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizeVelocity: 0
-  m_SynchronizeAngularVelocity: 0
-  m_TeleportEnabled: 1
-  m_TeleportIfDistanceGreaterThan: 3
 --- !u!114 &7344750061453683734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -413,17 +397,33 @@ MonoBehaviour:
   ShowParameterInspector: 1
   m_SynchronizeParameters:
   - Type: 4
-    SynchronizeType: 1
+    SynchronizeType: 2
     Name: IsWalking
   - Type: 9
-    SynchronizeType: 1
+    SynchronizeType: 2
     Name: IsLoseing
   - Type: 9
-    SynchronizeType: 1
+    SynchronizeType: 2
     Name: IsWin
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
+--- !u!114 &7106550583590841377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2093510231684848445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 0
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
 --- !u!1 &2094318030076551685
 GameObject:
   m_ObjectHideFlags: 0

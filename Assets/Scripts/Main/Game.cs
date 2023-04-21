@@ -8,7 +8,7 @@ using Player = Photon.Realtime.Player;
 using System.IO;
 using System;
 
-public class Game : MonoBehaviourPunCallbacks
+public class Game : MonoBehaviourPunCallbacks, IPunObservable
 {
 
     private static Game _instance;
@@ -22,8 +22,6 @@ public class Game : MonoBehaviourPunCallbacks
     //public Cell[,] mine;
 
     public List<(int, int)> mines = new List<(int, int)>();
-    public List<int> Xdata = new List<int>();
-    public List<int> Ydata = new List<int>();
     public bool gameover;
     public bool isclickButton = false;
     public bool isFlagButton = false;
@@ -32,6 +30,19 @@ public class Game : MonoBehaviourPunCallbacks
     private Animator animator;
     public PhotonView PV;
     public string mineString;
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if(stream.IsWriting){
+            stream.SendNext(isclickButton);
+            stream.SendNext(isFlagButton);
+            stream.SendNext(state);
+        }
+        else if(stream.IsReading){
+            isclickButton = (bool)stream.ReceiveNext();
+            isFlagButton = (bool)stream.ReceiveNext();
+            state = (Cell[,])stream.ReceiveNext();
+        }
+    }
 
     private void OnValidate(){
         mineCount = Mathf.Clamp(mineCount,0,width*height);
@@ -63,6 +74,8 @@ public class Game : MonoBehaviourPunCallbacks
                 state = new Cell[width,height];
                 gameover = false;
                 GetnerateCells();
+                GenerateMines();    
+                GenerateNumbers();
                 board.Draw(state);
     }
 
@@ -72,7 +85,10 @@ public class Game : MonoBehaviourPunCallbacks
             // GetnerateCells();
 
             if(PhotonNetwork.IsMasterClient == true){
-                Debug.Log("마스터클라");
+                
+            }
+            //PV.RPC("ReceiveMineData", RpcTarget.OthersBuffered, TreeString, mines);
+        Debug.Log("마스터클라");
                 state = new Cell[width,height];
                 gameover = false;
                 GetnerateCells();
@@ -80,9 +96,6 @@ public class Game : MonoBehaviourPunCallbacks
                 GenerateNumbers();
 
                 board.Draw(state); 
-            }
-            //PV.RPC("ReceiveMineData", RpcTarget.OthersBuffered, TreeString, mines);
-        
     }
     
     private void GetnerateCells(){
@@ -175,7 +188,6 @@ public class Game : MonoBehaviourPunCallbacks
 
         return count;
     }
-
     [PunRPC]
     public void Flag(Vector3 worldPosition){
        Vector3Int CellPosition = board.tilemap.WorldToCell(worldPosition);
@@ -203,10 +215,10 @@ public class Game : MonoBehaviourPunCallbacks
             }
 
             switch(cell.type){
-                case Cell.Type.Mine : Explode(cell); break;
-                case Cell.Type.Empty : Flood(cell); CheckWinCondition(); break;
-                // case Cell.Type.Mine : PV.RPC("Explode", RpcTarget.AllBuffered,cell); break;
-                // case Cell.Type.Empty : PV.RPC("Flood", RpcTarget.AllBuffered,cell); PV.RPC("CheckWinCondition", RpcTarget.AllBuffered); break;
+                //case Cell.Type.Mine : Explode(cell); break;
+                //case Cell.Type.Empty : Flood(cell); CheckWinCondition(); break;
+                case Cell.Type.Mine : PV.RPC("Explode", RpcTarget.AllBuffered,cell); break;
+                case Cell.Type.Empty : PV.RPC("Flood", RpcTarget.AllBuffered,cell); CheckWinCondition(); break;//PV.RPC("CheckWinCondition", RpcTarget.AllBuffered); break;
                 default :  cell.revealed = true;
                 state[CellPosition.x, CellPosition.y] = cell;
                 CheckWinCondition();
@@ -215,8 +227,8 @@ public class Game : MonoBehaviourPunCallbacks
             }
 
             if(cell.type == Cell.Type.Empty){
-                 Flood(cell);
-                //PV.RPC("Flood", RpcTarget.AllBuffered,cell);
+                 //Flood(cell);
+                PV.RPC("Flood", RpcTarget.AllBuffered,cell);
             }
 
             cell.revealed = true;
@@ -233,7 +245,7 @@ public class Game : MonoBehaviourPunCallbacks
     public void IsFlagButton(){
         isFlagButton = true;
     }
-
+    [PunRPC]
     private void Flood(Cell cell){
         if (cell.revealed) return;
         if (cell.type == Cell.Type.Mine || cell.type == Cell.Type.InValid) return;
@@ -242,18 +254,19 @@ public class Game : MonoBehaviourPunCallbacks
         state[cell.position.x, cell.position.y] = cell;
 
         if(cell.type == Cell.Type.Empty){
-            Flood(GetCell(cell.position.x - 1, cell.position.y));
-            Flood(GetCell(cell.position.x + 1, cell.position.y));
-            Flood(GetCell(cell.position.x, cell.position.y - 1));
-            Flood(GetCell(cell.position.x, cell.position.y + 1));
-            // PV.RPC("Flood", RpcTarget.AllBuffered,cell,GetCell(cell.position.x - 1, cell.position.y));
-            // PV.RPC("Flood", RpcTarget.AllBuffered,cell,GetCell(cell.position.x + 1, cell.position.y));
-            // PV.RPC("Flood", RpcTarget.AllBuffered,cell,GetCell(cell.position.x, cell.position.y - 1));
-            // PV.RPC("Flood", RpcTarget.AllBuffered,cell,GetCell(cell.position.x, cell.position.y + 1));
+            //Flood(GetCell(cell.position.x - 1, cell.position.y));
+            //Flood(GetCell(cell.position.x + 1, cell.position.y));
+            //Flood(GetCell(cell.position.x, cell.position.y - 1));
+            //Flood(GetCell(cell.position.x, cell.position.y + 1));
+             PV.RPC("Flood", RpcTarget.AllBuffered,cell,GetCell(cell.position.x - 1, cell.position.y));
+             PV.RPC("Flood", RpcTarget.AllBuffered,cell,GetCell(cell.position.x + 1, cell.position.y));
+             PV.RPC("Flood", RpcTarget.AllBuffered,cell,GetCell(cell.position.x, cell.position.y - 1));
+             PV.RPC("Flood", RpcTarget.AllBuffered,cell,GetCell(cell.position.x, cell.position.y + 1));
 
         }
     }
-   
+  
+   [PunRPC]
     private void Explode(Cell cell){
 
         //player.GetComponent<PhotonView>().RPC("Dead", RpcTarget.AllBuffered);
@@ -281,7 +294,6 @@ public class Game : MonoBehaviourPunCallbacks
         }
 
     }
- 
     private void CheckWinCondition(){
         for(int x = 0; x < width; x++){
             for(int y = 0; y <height; y++){
@@ -344,6 +356,8 @@ public class Game : MonoBehaviourPunCallbacks
 
         player.transform.rotation = Quaternion.Euler(0f,180f,0f);
     }
+
+    
 }
 
 
