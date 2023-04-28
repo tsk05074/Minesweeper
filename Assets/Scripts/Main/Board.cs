@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using Photon.Pun;
 
-public class Board : MonoBehaviourPunCallbacks, IPunObservable
-{
+[System.Serializable]
+public class Board : MonoBehaviour{
     public Tilemap tilemap {get; private set;}
 
     public Tile tileUnknown;
@@ -26,7 +25,6 @@ public class Board : MonoBehaviourPunCallbacks, IPunObservable
 
     public Game game;
 
-    public PhotonView BoardPV;
 
     public bool isTile = false;
 
@@ -34,12 +32,11 @@ public class Board : MonoBehaviourPunCallbacks, IPunObservable
    private void Awake() {
         tilemap = GetComponent<Tilemap>();
         game = FindObjectOfType<Game>();
-        BoardPV = GetComponent<PhotonView>();
    }
-
    public void Draw(Cell[,] state){
         //행의갯수
         int width = state.GetLength(0);
+
         //열의 갯수
         int height = state.GetLength(1);
 
@@ -49,51 +46,17 @@ public class Board : MonoBehaviourPunCallbacks, IPunObservable
                 for (int y = 0; y < height; y++)
                 {
                     cell = state[x, y];
-                    //BoardPV.RPC("SetStone", RpcTarget.All, cell.position);
                     tilemap.SetTile(cell.position, GetTile(cell));
-                    //var q = PhotonNetwork.Instantiate();
-                    if (!isTile && PhotonNetwork.IsMasterClient)
+                    if (!isTile)
                     {
-                        var tile = PhotonNetwork.Instantiate("Box", new Vector3Int(cell.position.x, 0, cell.position.y), Quaternion.identity, 0);
-                        //var tile = Instantiate(Box, new Vector3Int(cell.position.x,0,cell.position.y), Quaternion.identity);
+                        var tile = Instantiate(Box, new Vector3Int(cell.position.x,0,cell.position.y), Quaternion.identity);
                     }
                 }
             }
-        
-
-       
-            for (int x = 0; x < width; x++)
-            {
-                for (int y = 0; y < height; y++)
-                {
-                    cell = state[x, y];
-                    //BoardPV.RPC("SetStone", RpcTarget.All, cell.position);
-                    tilemap.SetTile(new Vector3Int(cell.position.x + 50, cell.position.y, 0), GetTile(cell));
-                    //var q = PhotonNetwork.Instantiate();
-                    if (!isTile && PhotonNetwork.IsMasterClient)
-                    {
-                        var tile = PhotonNetwork.Instantiate("Box", new Vector3Int(cell.position.x + 50, 0, cell.position.y), Quaternion.identity, 0);
-                        //var tile = Instantiate(Box, new Vector3Int(cell.position.x,0,cell.position.y), Quaternion.identity);
-                    }
-                }
-            }
-        
-
-        
-
         Debug.Log("Draw");
 
         isTile = true;
    }
-
-//    public void SetStone(Vector3Int pos){
-//         Debug.Log("셋타일");
-//         if(!BoardPV.IsMine) return;
-
-//         tilemap.SetTile(pos, GetTile(cell));
-//    }
-
-
    private Tile GetTile(Cell cell){
         if(cell.revealed){
             return GetRevealedTile(cell);
@@ -127,17 +90,5 @@ public class Board : MonoBehaviourPunCallbacks, IPunObservable
             default : return null;
         }
    }
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-         if(stream.IsWriting){
-            stream.SendNext(tilemap);
-            stream.SendNext(cell);
-         
-        }
-        else{
-            tilemap = (Tilemap)stream.ReceiveNext();
-            cell = (Cell)stream.ReceiveNext();
-            
-        }
-    }
+
 }

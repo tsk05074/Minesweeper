@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using DG.Tweening;
-using Photon.Pun;
 public class MainTitleView : MonoBehaviour
 {
     public GameObject Option;
@@ -20,12 +19,12 @@ public class MainTitleView : MonoBehaviour
         SoundManager.Instance.PlaySFX("click");
         fadeImage.DOFade(1, 0.5f).From(0)
             .OnStart(() => { fadeImage.gameObject.SetActive(true); })
-            .OnComplete(() => { SceneManager.LoadScene("Lobby"); });
+            .OnComplete(() => { SceneManager.LoadScene("Tutorial"); });
     }
 
     public void ResetGame(){
         fadeImage.DOFade(1, 0.5f).From(0)
-            .OnStart(() => { fadeImage.gameObject.SetActive(true); PhotonNetwork.LeaveRoom(); })
+            .OnStart(() => { fadeImage.gameObject.SetActive(true); })
             .OnComplete(() => { SceneManager.LoadScene("Title"); });
     }
 
