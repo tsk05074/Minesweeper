@@ -1,0 +1,407 @@
+﻿#include "pch-c.h"
+#ifndef _MSC_VER
+# include <alloca.h>
+#else
+# include <malloc.h>
+#endif
+
+
+#include "codegen/il2cpp-codegen-metadata.h"
+
+
+
+
+
+// 0x00000001 System.Boolean ITutorialHandler::OnTutorialFinished()
+// 0x00000002 UnityEngine.Events.UnityAction Excellcube.EasyTutorial.Page.ActionTutorialPage::get_CompleteTutorial()
+extern void ActionTutorialPage_get_CompleteTutorial_m198E656CA23F640C700487C5F17C59BCD00147F1 (void);
+// 0x00000003 System.Void Excellcube.EasyTutorial.Page.ActionTutorialPage::set_CompleteTutorial(UnityEngine.Events.UnityAction)
+extern void ActionTutorialPage_set_CompleteTutorial_mD50B8BA8DC0D1974D06E2F0A0695314ECBA2FEFF (void);
+// 0x00000004 System.Void Excellcube.EasyTutorial.Page.ActionTutorialPage::.ctor(Excellcube.EasyTutorial.Page.ActionTutorialPageView)
+extern void ActionTutorialPage__ctor_m09C717C43B2E80E04A2919E9B100B047DB170DE4 (void);
+// 0x00000005 System.Void Excellcube.EasyTutorial.Page.ActionTutorialPage::ConfigureView()
+extern void ActionTutorialPage_ConfigureView_mE63A623790DD62C6E997E1B9B2DF9A07CF344115 (void);
+// 0x00000006 System.Void Excellcube.EasyTutorial.Page.ActionTutorialPage::SearchDynamicHighlightTarget(Excellcube.EasyTutorial.Page.ActionTutorialPageData&)
+extern void ActionTutorialPage_SearchDynamicHighlightTarget_m8B405F99324C3A8EEB8983C21BDE280B5FA746A4 (void);
+// 0x00000007 System.Void Excellcube.EasyTutorial.Page.ActionTutorialPage::<ConfigureView>b__6_0()
+extern void ActionTutorialPage_U3CConfigureViewU3Eb__6_0_m908B828DC28C303DEE7AC936860A65BEA2067B62 (void);
+// 0x00000008 System.Void Excellcube.EasyTutorial.Page.ActionTutorialPage/<>c__DisplayClass7_0::.ctor()
+extern void U3CU3Ec__DisplayClass7_0__ctor_m7F31764CD94A9772E4BB3C96F960D75BCD8F9E42 (void);
+// 0x00000009 System.Boolean Excellcube.EasyTutorial.Page.ActionTutorialPage/<>c__DisplayClass7_0::<SearchDynamicHighlightTarget>b__0(Excellcube.EasyTutorial.Utils.TutorialSelectionTarget)
+extern void U3CU3Ec__DisplayClass7_0_U3CSearchDynamicHighlightTargetU3Eb__0_m8D7212AB9CD67D1F3C89778A4541526C3A80E5E4 (void);
+// 0x0000000A System.String Excellcube.EasyTutorial.Page.ActionTutorialPageData::get_ActionLog()
+extern void ActionTutorialPageData_get_ActionLog_m9C3EA47ED3894238EBA25A389244F56E1C808D4F (void);
+// 0x0000000B System.String Excellcube.EasyTutorial.Page.ActionTutorialPageData::get_ActionLogKey()
+extern void ActionTutorialPageData_get_ActionLogKey_mD00428541C26F87E694FE5FE888F9E1C3390B7FC (void);
+// 0x0000000C UnityEngine.RectTransform Excellcube.EasyTutorial.Page.ActionTutorialPageData::get_HighlightTarget()
+extern void ActionTutorialPageData_get_HighlightTarget_mB4FED2A9E6987609E2E38E54F7D6257CDAAC8AF4 (void);
+// 0x0000000D System.Void Excellcube.EasyTutorial.Page.ActionTutorialPageData::set_HighlightTarget(UnityEngine.RectTransform)
+extern void ActionTutorialPageData_set_HighlightTarget_m617BFFED6B5EFA2233BF0133CAB044AA8F353536 (void);
+// 0x0000000E UnityEngine.Transform Excellcube.EasyTutorial.Page.ActionTutorialPageData::get_DynamicTargetRoot()
+extern void ActionTutorialPageData_get_DynamicTargetRoot_m1CA7CD216DAFCA1EFD0ED284794D1CEFCAA97D51 (void);
+// 0x0000000F System.String Excellcube.EasyTutorial.Page.ActionTutorialPageData::get_DynamicTargetKey()
+extern void ActionTutorialPageData_get_DynamicTargetKey_mC72148FA3F887AB7E703ADAABB98A49A28D14CB5 (void);
+// 0x00000010 Excellcube.EasyTutorial.Page.IndicatorPosition Excellcube.EasyTutorial.Page.ActionTutorialPageData::get_IndicatorPosition()
+extern void ActionTutorialPageData_get_IndicatorPosition_mB9DC78BFDED920BE0745E14A62B92E9645F77E19 (void);
+// 0x00000011 System.String Excellcube.EasyTutorial.Page.ActionTutorialPageData::get_CompleteKey()
+extern void ActionTutorialPageData_get_CompleteKey_mADAD2D2EA96B478EF25C19CDE03667020A6EB305 (void);
+// 0x00000012 System.Void Excellcube.EasyTutorial.Page.ActionTutorialPageData::.ctor()
+extern void ActionTutorialPageData__ctor_mB7FBB4059D7E35792A3B34C91E12A2E8AF5C574B (void);
+// 0x00000013 TMPro.TextMeshProUGUI Excellcube.EasyTutorial.Page.ActionTutorialPageView::get_ActionLogText()
+extern void ActionTutorialPageView_get_ActionLogText_m1BC499F5E10D6A72EA975B352BCC5F6A0BCCA741 (void);
+// 0x00000014 Excellcube.EasyTutorial.Widget.Indicator Excellcube.EasyTutorial.Page.ActionTutorialPageView::get_Indicator()
+extern void ActionTutorialPageView_get_Indicator_m4981BD8AAF3AD94BAA1181CCDD6A8E539BE67D32 (void);
+// 0x00000015 Coffee.UIExtensions.Unmask Excellcube.EasyTutorial.Page.ActionTutorialPageView::get_UnmaskPanel()
+extern void ActionTutorialPageView_get_UnmaskPanel_m60124D90B1A94C6DD4D226CA25F2E914FBB79A43 (void);
+// 0x00000016 System.Void Excellcube.EasyTutorial.Page.ActionTutorialPageView::.ctor()
+extern void ActionTutorialPageView__ctor_mC33C2D186C4F85ED3E13FD8C51D228ECAFA582D5 (void);
+// 0x00000017 System.Void Excellcube.EasyTutorial.Page.DetailTutorialPage::.ctor(Excellcube.EasyTutorial.Page.DetailTutorialPageView)
+extern void DetailTutorialPage__ctor_m085DC65A0E1950D9C809EEDD0E1CB55127334A8E (void);
+// 0x00000018 System.Void Excellcube.EasyTutorial.Page.DetailTutorialPage::ConfigureView()
+extern void DetailTutorialPage_ConfigureView_m822130E077524FB71A24D3AA509E6818D56940C9 (void);
+// 0x00000019 UnityEngine.Sprite Excellcube.EasyTutorial.Page.DetailTutorialPageContentData::get_DetailSprite()
+extern void DetailTutorialPageContentData_get_DetailSprite_m65F3F06DA927B048D3C3355C9AB391818EE45A58 (void);
+// 0x0000001A System.String Excellcube.EasyTutorial.Page.DetailTutorialPageContentData::get_Description()
+extern void DetailTutorialPageContentData_get_Description_mFE0006B8BCCF498D152DF0C8D6D2819CE774B0DE (void);
+// 0x0000001B System.String Excellcube.EasyTutorial.Page.DetailTutorialPageContentData::get_DescriptionKey()
+extern void DetailTutorialPageContentData_get_DescriptionKey_m29FA2990B96B3FDDB59B98C6698BC38555ED1937 (void);
+// 0x0000001C System.Void Excellcube.EasyTutorial.Page.DetailTutorialPageContentData::.ctor()
+extern void DetailTutorialPageContentData__ctor_mECFA9CB210ED2CCFE57343301301324F051F2B3A (void);
+// 0x0000001D UnityEngine.UI.Image Excellcube.EasyTutorial.Page.DetailTutorialPageView::get_DetailImage()
+extern void DetailTutorialPageView_get_DetailImage_m5598DA94B96CE5F9609100F69B6BC34DEA83C068 (void);
+// 0x0000001E UnityEngine.UI.Text Excellcube.EasyTutorial.Page.DetailTutorialPageView::get_DescriptionText()
+extern void DetailTutorialPageView_get_DescriptionText_mE00EC03E930873B91B8F839925398962ADDF4A7B (void);
+// 0x0000001F Excellcube.EasyTutorial.Page.DetailTutorialPopupView Excellcube.EasyTutorial.Page.DetailTutorialPageView::get_PopupView()
+extern void DetailTutorialPageView_get_PopupView_m056D01B4392C6CC57EC70B7BA6F85D64895EAC72 (void);
+// 0x00000020 System.Void Excellcube.EasyTutorial.Page.DetailTutorialPageView::.ctor()
+extern void DetailTutorialPageView__ctor_mAB38BE58EF3F927A49FF513C0D1955D39D1661D6 (void);
+// 0x00000021 System.Void Excellcube.EasyTutorial.Page.DetailTutorialPopupView::Show()
+extern void DetailTutorialPopupView_Show_m7FEB19FFFD38B434A849FA4C12EAAF41EED73F4B (void);
+// 0x00000022 System.Void Excellcube.EasyTutorial.Page.DetailTutorialPopupView::Hide()
+extern void DetailTutorialPopupView_Hide_m0D135C9B7711412F247D575D990664414BA6A737 (void);
+// 0x00000023 System.Void Excellcube.EasyTutorial.Page.DetailTutorialPopupView::.ctor()
+extern void DetailTutorialPopupView__ctor_mBE6369A117D5B89DF7DDF74CF557B48330E6B291 (void);
+// 0x00000024 UnityEngine.Events.UnityAction Excellcube.EasyTutorial.Page.DialogTutorialPage::get_CompleteTutorial()
+extern void DialogTutorialPage_get_CompleteTutorial_mDA1709DC17E8A29804D3F95767745757931EEEA4 (void);
+// 0x00000025 System.Void Excellcube.EasyTutorial.Page.DialogTutorialPage::set_CompleteTutorial(UnityEngine.Events.UnityAction)
+extern void DialogTutorialPage_set_CompleteTutorial_m21914C97973CF20D0325B24DAA21DF2A9C250178 (void);
+// 0x00000026 System.Void Excellcube.EasyTutorial.Page.DialogTutorialPage::.ctor(Excellcube.EasyTutorial.Page.DialogTutorialPageView)
+extern void DialogTutorialPage__ctor_mE90C40C15A478E18CD620CF18657B0603BDF8BF5 (void);
+// 0x00000027 System.Void Excellcube.EasyTutorial.Page.DialogTutorialPage::ConfigureView()
+extern void DialogTutorialPage_ConfigureView_mD270A2C69BF4270FC0A155FAC7297E65646F67CC (void);
+// 0x00000028 System.Void Excellcube.EasyTutorial.Page.DialogTutorialPage::TouchView()
+extern void DialogTutorialPage_TouchView_mE83A6ABE4A4016F49F339AEC0F714D8161A4313F (void);
+// 0x00000029 UnityEngine.Sprite Excellcube.EasyTutorial.Page.DialogTutorialPageData::get_LeftSprite()
+extern void DialogTutorialPageData_get_LeftSprite_mBE851C5D37F31F4626EB40F9523736E7C3414706 (void);
+// 0x0000002A UnityEngine.Sprite Excellcube.EasyTutorial.Page.DialogTutorialPageData::get_RightSprite()
+extern void DialogTutorialPageData_get_RightSprite_m3383EF8A84701F592A7C5C4F69829B00AB6F25B5 (void);
+// 0x0000002B System.String Excellcube.EasyTutorial.Page.DialogTutorialPageData::get_CharacterName()
+extern void DialogTutorialPageData_get_CharacterName_m3E8B6B90DAB784973A6BA28CB05C745E91715EC1 (void);
+// 0x0000002C System.String Excellcube.EasyTutorial.Page.DialogTutorialPageData::get_CharacterNameKey()
+extern void DialogTutorialPageData_get_CharacterNameKey_mD5AD9AB326194D188F459432FDEA92EAF9A44CA4 (void);
+// 0x0000002D System.String Excellcube.EasyTutorial.Page.DialogTutorialPageData::get_Dialog()
+extern void DialogTutorialPageData_get_Dialog_m8328919A391E28161884860312BE7BE1907ECF32 (void);
+// 0x0000002E System.String Excellcube.EasyTutorial.Page.DialogTutorialPageData::get_DialogKey()
+extern void DialogTutorialPageData_get_DialogKey_mFD54399693FD0DBCDFCC6A1DCA0B5ACC45E2327A (void);
+// 0x0000002F System.Void Excellcube.EasyTutorial.Page.DialogTutorialPageData::.ctor()
+extern void DialogTutorialPageData__ctor_mCAC5D886E61BBE955C128AAEBB4EAF1B5FCD82DF (void);
+// 0x00000030 UnityEngine.UI.Image Excellcube.EasyTutorial.Page.DialogTutorialPageView::get_LeftImage()
+extern void DialogTutorialPageView_get_LeftImage_mD2FA0A518B90C739FC847CF7BFF677FFCBB26B3A (void);
+// 0x00000031 UnityEngine.UI.Image Excellcube.EasyTutorial.Page.DialogTutorialPageView::get_RightImage()
+extern void DialogTutorialPageView_get_RightImage_m83D450DE11151567167B0834B5F682D4F3E6FDC4 (void);
+// 0x00000032 Excellcube.EasyTutorial.Widget.DialogArrow Excellcube.EasyTutorial.Page.DialogTutorialPageView::get_Arrow()
+extern void DialogTutorialPageView_get_Arrow_m7350897A8E13862707153EEDC4E44B7F64FFBE80 (void);
+// 0x00000033 TMPro.TextMeshProUGUI Excellcube.EasyTutorial.Page.DialogTutorialPageView::get_NameText()
+extern void DialogTutorialPageView_get_NameText_m6FDB4F2EAF356150DE9288FB8ABC35A0864D13BC (void);
+// 0x00000034 TMPro.TextMeshProUGUI Excellcube.EasyTutorial.Page.DialogTutorialPageView::get_DialogText()
+extern void DialogTutorialPageView_get_DialogText_m91C755279D5BE259E3CDD4ADBAAB49CD13ADABE6 (void);
+// 0x00000035 System.Void Excellcube.EasyTutorial.Page.DialogTutorialPageView::OnPointerClick(UnityEngine.EventSystems.PointerEventData)
+extern void DialogTutorialPageView_OnPointerClick_m653F16AD9E315597CCDC3AF4C922CD27C4212617 (void);
+// 0x00000036 System.Void Excellcube.EasyTutorial.Page.DialogTutorialPageView::AddClickAction(UnityEngine.Events.UnityAction)
+extern void DialogTutorialPageView_AddClickAction_m6427344423825037F3D1A3B0D7BEE54BC7DDB31D (void);
+// 0x00000037 System.Void Excellcube.EasyTutorial.Page.DialogTutorialPageView::StartTyping(System.String)
+extern void DialogTutorialPageView_StartTyping_m4A2AE4C9FC6283DC66747EA5B884FF6F0B88E775 (void);
+// 0x00000038 System.Collections.IEnumerator Excellcube.EasyTutorial.Page.DialogTutorialPageView::StartTypingInternal(System.String)
+extern void DialogTutorialPageView_StartTypingInternal_mE6BACF4517028D1653C76997A799D68CD3B3C087 (void);
+// 0x00000039 System.Void Excellcube.EasyTutorial.Page.DialogTutorialPageView::PrepareTyping(System.String)
+extern void DialogTutorialPageView_PrepareTyping_m32BA1B4FCFB419E773A54FBA5F3654176A638FBE (void);
+// 0x0000003A System.Collections.IEnumerator Excellcube.EasyTutorial.Page.DialogTutorialPageView::RunTyping()
+extern void DialogTutorialPageView_RunTyping_m0A41A35395BFDEB12E45403AE962C53B908975C8 (void);
+// 0x0000003B System.Void Excellcube.EasyTutorial.Page.DialogTutorialPageView::FinishTyping()
+extern void DialogTutorialPageView_FinishTyping_m658B94A9C8D66E222B41F80E1F52B34CF947945E (void);
+// 0x0000003C System.Void Excellcube.EasyTutorial.Page.DialogTutorialPageView::SkipTyping()
+extern void DialogTutorialPageView_SkipTyping_m5FE2C8F8252BC87D5D3DF2F0019CABBBD69DF257 (void);
+// 0x0000003D System.Boolean Excellcube.EasyTutorial.Page.DialogTutorialPageView::IsTyping()
+extern void DialogTutorialPageView_IsTyping_mA7315BC86ED2010574A44C86A52059EF90C66686 (void);
+// 0x0000003E System.Void Excellcube.EasyTutorial.Page.DialogTutorialPageView::.ctor()
+extern void DialogTutorialPageView__ctor_mAB44CE7A51D81EB3913B861374D5D3CFD6D811BD (void);
+// 0x0000003F System.Void Excellcube.EasyTutorial.Page.DialogTutorialPageView/<StartTypingInternal>d__21::.ctor(System.Int32)
+extern void U3CStartTypingInternalU3Ed__21__ctor_mAD49A83AA891B7570736108CEBBF8E0271366099 (void);
+// 0x00000040 System.Void Excellcube.EasyTutorial.Page.DialogTutorialPageView/<StartTypingInternal>d__21::System.IDisposable.Dispose()
+extern void U3CStartTypingInternalU3Ed__21_System_IDisposable_Dispose_m8234DE4B860EC64C0C4DF54F8DCB2C9EEC37B3DC (void);
+// 0x00000041 System.Boolean Excellcube.EasyTutorial.Page.DialogTutorialPageView/<StartTypingInternal>d__21::MoveNext()
+extern void U3CStartTypingInternalU3Ed__21_MoveNext_mB9277BB0FA96CB576303341927BEB22EE2172292 (void);
+// 0x00000042 System.Object Excellcube.EasyTutorial.Page.DialogTutorialPageView/<StartTypingInternal>d__21::System.Collections.Generic.IEnumerator<System.Object>.get_Current()
+extern void U3CStartTypingInternalU3Ed__21_System_Collections_Generic_IEnumeratorU3CSystem_ObjectU3E_get_Current_mAB929F02336A7829B0F46B7C00A034556D212CA4 (void);
+// 0x00000043 System.Void Excellcube.EasyTutorial.Page.DialogTutorialPageView/<StartTypingInternal>d__21::System.Collections.IEnumerator.Reset()
+extern void U3CStartTypingInternalU3Ed__21_System_Collections_IEnumerator_Reset_m60AD91A82DD9936B955CA482AFA93F9A6CFC1556 (void);
+// 0x00000044 System.Object Excellcube.EasyTutorial.Page.DialogTutorialPageView/<StartTypingInternal>d__21::System.Collections.IEnumerator.get_Current()
+extern void U3CStartTypingInternalU3Ed__21_System_Collections_IEnumerator_get_Current_mA63858F9985D5DD5A8D07607B0B26D9E166BD729 (void);
+// 0x00000045 System.Void Excellcube.EasyTutorial.Page.DialogTutorialPageView/<RunTyping>d__23::.ctor(System.Int32)
+extern void U3CRunTypingU3Ed__23__ctor_m12864C4EA0C6A6A160874117E5D12E58F935E1B4 (void);
+// 0x00000046 System.Void Excellcube.EasyTutorial.Page.DialogTutorialPageView/<RunTyping>d__23::System.IDisposable.Dispose()
+extern void U3CRunTypingU3Ed__23_System_IDisposable_Dispose_m2B2F34CBF265D2507B1EB603C526E53F87FB2E0A (void);
+// 0x00000047 System.Boolean Excellcube.EasyTutorial.Page.DialogTutorialPageView/<RunTyping>d__23::MoveNext()
+extern void U3CRunTypingU3Ed__23_MoveNext_mA31E409A6FE96AEC3216741D1D142E6C8D1778D5 (void);
+// 0x00000048 System.Object Excellcube.EasyTutorial.Page.DialogTutorialPageView/<RunTyping>d__23::System.Collections.Generic.IEnumerator<System.Object>.get_Current()
+extern void U3CRunTypingU3Ed__23_System_Collections_Generic_IEnumeratorU3CSystem_ObjectU3E_get_Current_mE08E1AB9948FD25595AD42AFEAB662B618DBA4E4 (void);
+// 0x00000049 System.Void Excellcube.EasyTutorial.Page.DialogTutorialPageView/<RunTyping>d__23::System.Collections.IEnumerator.Reset()
+extern void U3CRunTypingU3Ed__23_System_Collections_IEnumerator_Reset_m06198AE11DA80A90F75B5A908613D894623F52C6 (void);
+// 0x0000004A System.Object Excellcube.EasyTutorial.Page.DialogTutorialPageView/<RunTyping>d__23::System.Collections.IEnumerator.get_Current()
+extern void U3CRunTypingU3Ed__23_System_Collections_IEnumerator_get_Current_mC5D84C2A8F623C85ED5DC1138C81E952DABE8966 (void);
+// 0x0000004B System.Void Excellcube.EasyTutorial.Page.TutorialPage::ShowUsingData(Excellcube.EasyTutorial.Page.TutorialPageData)
+extern void TutorialPage_ShowUsingData_m8D5ECDA6630475FE8AE370B7C6AF64624F3C9913 (void);
+// 0x0000004C System.Void Excellcube.EasyTutorial.Page.TutorialPage::ConfigureView()
+// 0x0000004D System.Void Excellcube.EasyTutorial.Page.TutorialPage::.ctor()
+extern void TutorialPage__ctor_m210421428BD4C1E1146BB354401A41BE0068EFD4 (void);
+// 0x0000004E System.Boolean Excellcube.EasyTutorial.Page.TutorialPageData::get_UseLocalization()
+extern void TutorialPageData_get_UseLocalization_m4B3BDB98B41860223A0636D10CA925DBE1DCA08A (void);
+// 0x0000004F System.Void Excellcube.EasyTutorial.Page.TutorialPageData::set_UseLocalization(System.Boolean)
+extern void TutorialPageData_set_UseLocalization_m7B616C4707C90C552D712FFC73D8A6DAE00759FD (void);
+// 0x00000050 Excellcube.EasyTutorial.Utils.TextLocalizer Excellcube.EasyTutorial.Page.TutorialPageData::get_TextLocalizer()
+extern void TutorialPageData_get_TextLocalizer_m4DB172C12AA6A9136701D6B0964233AD49B5BCAF (void);
+// 0x00000051 System.Void Excellcube.EasyTutorial.Page.TutorialPageData::set_TextLocalizer(Excellcube.EasyTutorial.Utils.TextLocalizer)
+extern void TutorialPageData_set_TextLocalizer_mC4BCA7069D412DC6D7D771435D86C1A8AD709103 (void);
+// 0x00000052 System.String Excellcube.EasyTutorial.Page.TutorialPageData::get_LocalizationTable()
+extern void TutorialPageData_get_LocalizationTable_m52AFD818F03302DBEE8868DDD11839DA7C9F4FE3 (void);
+// 0x00000053 System.Void Excellcube.EasyTutorial.Page.TutorialPageData::set_LocalizationTable(System.String)
+extern void TutorialPageData_set_LocalizationTable_m6AF1E76E35360D84F228DC4CA2065A257A1BFE40 (void);
+// 0x00000054 System.Boolean Excellcube.EasyTutorial.Page.TutorialPageData::get_Skip()
+extern void TutorialPageData_get_Skip_mC3A58AF610BCF0A0902E3CB4EB9F5A9A3B4954DC (void);
+// 0x00000055 System.Boolean Excellcube.EasyTutorial.Page.TutorialPageData::get_HideSkipButton()
+extern void TutorialPageData_get_HideSkipButton_m79E33AF0FDD6772D3C06A3CD784F80FE6714EFDB (void);
+// 0x00000056 System.Single Excellcube.EasyTutorial.Page.TutorialPageData::get_StartDelay()
+extern void TutorialPageData_get_StartDelay_m9CADB3E61667657B50DCB4764C868BAC007E99B7 (void);
+// 0x00000057 System.Boolean Excellcube.EasyTutorial.Page.TutorialPageData::get_BlockTouchDuringDelay()
+extern void TutorialPageData_get_BlockTouchDuringDelay_m62797F8BC2BA88A05833F0C044DF46C480F03AAF (void);
+// 0x00000058 UnityEngine.Events.UnityEvent Excellcube.EasyTutorial.Page.TutorialPageData::get_OnTutorialBegin()
+extern void TutorialPageData_get_OnTutorialBegin_m9D3E287E7ED44CEF623B99E898059892B60755C1 (void);
+// 0x00000059 UnityEngine.Events.UnityEvent Excellcube.EasyTutorial.Page.TutorialPageData::get_OnTutorialEnded()
+extern void TutorialPageData_get_OnTutorialEnded_mBD5592319C1FEF3D6783ECB3D6D7FA6D82A699E1 (void);
+// 0x0000005A System.Void Excellcube.EasyTutorial.Page.TutorialPageData::.ctor()
+extern void TutorialPageData__ctor_m66F8D7E0BF725212050AB5F6ACA5193492FD6A93 (void);
+// 0x0000005B Excellcube.EasyTutorial.Page.TutorialPageData Excellcube.EasyTutorial.Page.TutorialPageMaker::get_PageData()
+extern void TutorialPageMaker_get_PageData_m44FC694C37B377586E29BC7C291649B117D01A63 (void);
+// 0x0000005C System.Void Excellcube.EasyTutorial.Page.TutorialPageMaker::.ctor()
+extern void TutorialPageMaker__ctor_m579F038D27D8DFCD78A44ACA4DD0141C6DEE8872 (void);
+static Il2CppMethodPointer s_methodPointers[92] = 
+{
+	NULL,
+	ActionTutorialPage_get_CompleteTutorial_m198E656CA23F640C700487C5F17C59BCD00147F1,
+	ActionTutorialPage_set_CompleteTutorial_mD50B8BA8DC0D1974D06E2F0A0695314ECBA2FEFF,
+	ActionTutorialPage__ctor_m09C717C43B2E80E04A2919E9B100B047DB170DE4,
+	ActionTutorialPage_ConfigureView_mE63A623790DD62C6E997E1B9B2DF9A07CF344115,
+	ActionTutorialPage_SearchDynamicHighlightTarget_m8B405F99324C3A8EEB8983C21BDE280B5FA746A4,
+	ActionTutorialPage_U3CConfigureViewU3Eb__6_0_m908B828DC28C303DEE7AC936860A65BEA2067B62,
+	U3CU3Ec__DisplayClass7_0__ctor_m7F31764CD94A9772E4BB3C96F960D75BCD8F9E42,
+	U3CU3Ec__DisplayClass7_0_U3CSearchDynamicHighlightTargetU3Eb__0_m8D7212AB9CD67D1F3C89778A4541526C3A80E5E4,
+	ActionTutorialPageData_get_ActionLog_m9C3EA47ED3894238EBA25A389244F56E1C808D4F,
+	ActionTutorialPageData_get_ActionLogKey_mD00428541C26F87E694FE5FE888F9E1C3390B7FC,
+	ActionTutorialPageData_get_HighlightTarget_mB4FED2A9E6987609E2E38E54F7D6257CDAAC8AF4,
+	ActionTutorialPageData_set_HighlightTarget_m617BFFED6B5EFA2233BF0133CAB044AA8F353536,
+	ActionTutorialPageData_get_DynamicTargetRoot_m1CA7CD216DAFCA1EFD0ED284794D1CEFCAA97D51,
+	ActionTutorialPageData_get_DynamicTargetKey_mC72148FA3F887AB7E703ADAABB98A49A28D14CB5,
+	ActionTutorialPageData_get_IndicatorPosition_mB9DC78BFDED920BE0745E14A62B92E9645F77E19,
+	ActionTutorialPageData_get_CompleteKey_mADAD2D2EA96B478EF25C19CDE03667020A6EB305,
+	ActionTutorialPageData__ctor_mB7FBB4059D7E35792A3B34C91E12A2E8AF5C574B,
+	ActionTutorialPageView_get_ActionLogText_m1BC499F5E10D6A72EA975B352BCC5F6A0BCCA741,
+	ActionTutorialPageView_get_Indicator_m4981BD8AAF3AD94BAA1181CCDD6A8E539BE67D32,
+	ActionTutorialPageView_get_UnmaskPanel_m60124D90B1A94C6DD4D226CA25F2E914FBB79A43,
+	ActionTutorialPageView__ctor_mC33C2D186C4F85ED3E13FD8C51D228ECAFA582D5,
+	DetailTutorialPage__ctor_m085DC65A0E1950D9C809EEDD0E1CB55127334A8E,
+	DetailTutorialPage_ConfigureView_m822130E077524FB71A24D3AA509E6818D56940C9,
+	DetailTutorialPageContentData_get_DetailSprite_m65F3F06DA927B048D3C3355C9AB391818EE45A58,
+	DetailTutorialPageContentData_get_Description_mFE0006B8BCCF498D152DF0C8D6D2819CE774B0DE,
+	DetailTutorialPageContentData_get_DescriptionKey_m29FA2990B96B3FDDB59B98C6698BC38555ED1937,
+	DetailTutorialPageContentData__ctor_mECFA9CB210ED2CCFE57343301301324F051F2B3A,
+	DetailTutorialPageView_get_DetailImage_m5598DA94B96CE5F9609100F69B6BC34DEA83C068,
+	DetailTutorialPageView_get_DescriptionText_mE00EC03E930873B91B8F839925398962ADDF4A7B,
+	DetailTutorialPageView_get_PopupView_m056D01B4392C6CC57EC70B7BA6F85D64895EAC72,
+	DetailTutorialPageView__ctor_mAB38BE58EF3F927A49FF513C0D1955D39D1661D6,
+	DetailTutorialPopupView_Show_m7FEB19FFFD38B434A849FA4C12EAAF41EED73F4B,
+	DetailTutorialPopupView_Hide_m0D135C9B7711412F247D575D990664414BA6A737,
+	DetailTutorialPopupView__ctor_mBE6369A117D5B89DF7DDF74CF557B48330E6B291,
+	DialogTutorialPage_get_CompleteTutorial_mDA1709DC17E8A29804D3F95767745757931EEEA4,
+	DialogTutorialPage_set_CompleteTutorial_m21914C97973CF20D0325B24DAA21DF2A9C250178,
+	DialogTutorialPage__ctor_mE90C40C15A478E18CD620CF18657B0603BDF8BF5,
+	DialogTutorialPage_ConfigureView_mD270A2C69BF4270FC0A155FAC7297E65646F67CC,
+	DialogTutorialPage_TouchView_mE83A6ABE4A4016F49F339AEC0F714D8161A4313F,
+	DialogTutorialPageData_get_LeftSprite_mBE851C5D37F31F4626EB40F9523736E7C3414706,
+	DialogTutorialPageData_get_RightSprite_m3383EF8A84701F592A7C5C4F69829B00AB6F25B5,
+	DialogTutorialPageData_get_CharacterName_m3E8B6B90DAB784973A6BA28CB05C745E91715EC1,
+	DialogTutorialPageData_get_CharacterNameKey_mD5AD9AB326194D188F459432FDEA92EAF9A44CA4,
+	DialogTutorialPageData_get_Dialog_m8328919A391E28161884860312BE7BE1907ECF32,
+	DialogTutorialPageData_get_DialogKey_mFD54399693FD0DBCDFCC6A1DCA0B5ACC45E2327A,
+	DialogTutorialPageData__ctor_mCAC5D886E61BBE955C128AAEBB4EAF1B5FCD82DF,
+	DialogTutorialPageView_get_LeftImage_mD2FA0A518B90C739FC847CF7BFF677FFCBB26B3A,
+	DialogTutorialPageView_get_RightImage_m83D450DE11151567167B0834B5F682D4F3E6FDC4,
+	DialogTutorialPageView_get_Arrow_m7350897A8E13862707153EEDC4E44B7F64FFBE80,
+	DialogTutorialPageView_get_NameText_m6FDB4F2EAF356150DE9288FB8ABC35A0864D13BC,
+	DialogTutorialPageView_get_DialogText_m91C755279D5BE259E3CDD4ADBAAB49CD13ADABE6,
+	DialogTutorialPageView_OnPointerClick_m653F16AD9E315597CCDC3AF4C922CD27C4212617,
+	DialogTutorialPageView_AddClickAction_m6427344423825037F3D1A3B0D7BEE54BC7DDB31D,
+	DialogTutorialPageView_StartTyping_m4A2AE4C9FC6283DC66747EA5B884FF6F0B88E775,
+	DialogTutorialPageView_StartTypingInternal_mE6BACF4517028D1653C76997A799D68CD3B3C087,
+	DialogTutorialPageView_PrepareTyping_m32BA1B4FCFB419E773A54FBA5F3654176A638FBE,
+	DialogTutorialPageView_RunTyping_m0A41A35395BFDEB12E45403AE962C53B908975C8,
+	DialogTutorialPageView_FinishTyping_m658B94A9C8D66E222B41F80E1F52B34CF947945E,
+	DialogTutorialPageView_SkipTyping_m5FE2C8F8252BC87D5D3DF2F0019CABBBD69DF257,
+	DialogTutorialPageView_IsTyping_mA7315BC86ED2010574A44C86A52059EF90C66686,
+	DialogTutorialPageView__ctor_mAB44CE7A51D81EB3913B861374D5D3CFD6D811BD,
+	U3CStartTypingInternalU3Ed__21__ctor_mAD49A83AA891B7570736108CEBBF8E0271366099,
+	U3CStartTypingInternalU3Ed__21_System_IDisposable_Dispose_m8234DE4B860EC64C0C4DF54F8DCB2C9EEC37B3DC,
+	U3CStartTypingInternalU3Ed__21_MoveNext_mB9277BB0FA96CB576303341927BEB22EE2172292,
+	U3CStartTypingInternalU3Ed__21_System_Collections_Generic_IEnumeratorU3CSystem_ObjectU3E_get_Current_mAB929F02336A7829B0F46B7C00A034556D212CA4,
+	U3CStartTypingInternalU3Ed__21_System_Collections_IEnumerator_Reset_m60AD91A82DD9936B955CA482AFA93F9A6CFC1556,
+	U3CStartTypingInternalU3Ed__21_System_Collections_IEnumerator_get_Current_mA63858F9985D5DD5A8D07607B0B26D9E166BD729,
+	U3CRunTypingU3Ed__23__ctor_m12864C4EA0C6A6A160874117E5D12E58F935E1B4,
+	U3CRunTypingU3Ed__23_System_IDisposable_Dispose_m2B2F34CBF265D2507B1EB603C526E53F87FB2E0A,
+	U3CRunTypingU3Ed__23_MoveNext_mA31E409A6FE96AEC3216741D1D142E6C8D1778D5,
+	U3CRunTypingU3Ed__23_System_Collections_Generic_IEnumeratorU3CSystem_ObjectU3E_get_Current_mE08E1AB9948FD25595AD42AFEAB662B618DBA4E4,
+	U3CRunTypingU3Ed__23_System_Collections_IEnumerator_Reset_m06198AE11DA80A90F75B5A908613D894623F52C6,
+	U3CRunTypingU3Ed__23_System_Collections_IEnumerator_get_Current_mC5D84C2A8F623C85ED5DC1138C81E952DABE8966,
+	TutorialPage_ShowUsingData_m8D5ECDA6630475FE8AE370B7C6AF64624F3C9913,
+	NULL,
+	TutorialPage__ctor_m210421428BD4C1E1146BB354401A41BE0068EFD4,
+	TutorialPageData_get_UseLocalization_m4B3BDB98B41860223A0636D10CA925DBE1DCA08A,
+	TutorialPageData_set_UseLocalization_m7B616C4707C90C552D712FFC73D8A6DAE00759FD,
+	TutorialPageData_get_TextLocalizer_m4DB172C12AA6A9136701D6B0964233AD49B5BCAF,
+	TutorialPageData_set_TextLocalizer_mC4BCA7069D412DC6D7D771435D86C1A8AD709103,
+	TutorialPageData_get_LocalizationTable_m52AFD818F03302DBEE8868DDD11839DA7C9F4FE3,
+	TutorialPageData_set_LocalizationTable_m6AF1E76E35360D84F228DC4CA2065A257A1BFE40,
+	TutorialPageData_get_Skip_mC3A58AF610BCF0A0902E3CB4EB9F5A9A3B4954DC,
+	TutorialPageData_get_HideSkipButton_m79E33AF0FDD6772D3C06A3CD784F80FE6714EFDB,
+	TutorialPageData_get_StartDelay_m9CADB3E61667657B50DCB4764C868BAC007E99B7,
+	TutorialPageData_get_BlockTouchDuringDelay_m62797F8BC2BA88A05833F0C044DF46C480F03AAF,
+	TutorialPageData_get_OnTutorialBegin_m9D3E287E7ED44CEF623B99E898059892B60755C1,
+	TutorialPageData_get_OnTutorialEnded_mBD5592319C1FEF3D6783ECB3D6D7FA6D82A699E1,
+	TutorialPageData__ctor_m66F8D7E0BF725212050AB5F6ACA5193492FD6A93,
+	TutorialPageMaker_get_PageData_m44FC694C37B377586E29BC7C291649B117D01A63,
+	TutorialPageMaker__ctor_m579F038D27D8DFCD78A44ACA4DD0141C6DEE8872,
+};
+static const int32_t s_InvokerIndices[92] = 
+{
+	0,
+	4138,
+	3501,
+	3501,
+	4234,
+	3414,
+	4234,
+	4234,
+	2521,
+	4138,
+	4138,
+	4138,
+	3501,
+	4138,
+	4138,
+	4112,
+	4138,
+	4234,
+	4138,
+	4138,
+	4138,
+	4234,
+	3501,
+	4234,
+	4138,
+	4138,
+	4138,
+	4234,
+	4138,
+	4138,
+	4138,
+	4234,
+	4234,
+	4234,
+	4234,
+	4138,
+	3501,
+	3501,
+	4234,
+	4234,
+	4138,
+	4138,
+	4138,
+	4138,
+	4138,
+	4138,
+	4234,
+	4138,
+	4138,
+	4138,
+	4138,
+	4138,
+	3501,
+	3501,
+	3501,
+	3096,
+	3501,
+	4138,
+	4234,
+	4234,
+	4062,
+	4234,
+	3477,
+	4234,
+	4062,
+	4138,
+	4234,
+	4138,
+	3477,
+	4234,
+	4062,
+	4138,
+	4234,
+	4138,
+	3501,
+	0,
+	4234,
+	4062,
+	3422,
+	4138,
+	3501,
+	4138,
+	3501,
+	4062,
+	4062,
+	4175,
+	4062,
+	4138,
+	4138,
+	4234,
+	4138,
+	4234,
+};
+IL2CPP_EXTERN_C const Il2CppCodeGenModule g_Excellcube_EasyTutorial_Page_CodeGenModule;
+const Il2CppCodeGenModule g_Excellcube_EasyTutorial_Page_CodeGenModule = 
+{
+	"Excellcube.EasyTutorial.Page.dll",
+	92,
+	s_methodPointers,
+	0,
+	NULL,
+	s_InvokerIndices,
+	0,
+	NULL,
+	0,
+	NULL,
+	0,
+	NULL,
+	NULL,
+	NULL, // module initializer,
+	NULL,
+	NULL,
+	NULL,
+};

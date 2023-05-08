@@ -900,7 +900,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 16
   height: 16
-  mineCount: 16
+  mineCount: 32
   gameover: 0
   isclickButton: 0
   isFlagButton: 0

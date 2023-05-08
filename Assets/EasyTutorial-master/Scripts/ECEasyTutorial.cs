@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using Excellcube.EasyTutorial.Utils;
 
 namespace Excellcube.EasyTutorial
 {
@@ -277,6 +278,10 @@ namespace Excellcube.EasyTutorial
             m_LastClearIndex = m_CurrTutorialIndex;
             m_CurrTutorialData?.OnTutorialEnded.Invoke();
             StartCoroutine( ShowNextTutorials() );
+        }
+
+        public void PressTutorialButton(){
+            TutorialEvent.Instance.Broadcast("TUTORIAL_BUTTON_02");
         }
     }
 }
